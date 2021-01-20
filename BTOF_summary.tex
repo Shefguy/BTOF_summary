@@ -1,0 +1,139 @@
+\documentclass[12pt,a4paper,oneside]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage[pdftex,dvipsnames]{xcolor}  % Coloured text etc.
+\usepackage{enumerate}% http://ctan.org/pkg/enumerate
+
+
+\usepackage{graphicx}
+\graphicspath{{./Bilder/}}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\usepackage{xargs}                      % Use more than one optional parameter in a new commands
+\usepackage[colorinlistoftodos,prependcaption,textsize=tiny,textwidth=\linewidth/1.0]{todonotes}
+\newcommandx{\unsure}[2][1=]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red,#1]{#2}}
+\newcommandx{\abbreviation}[2][1=]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,#1]{#2}}
+\newcommandx{\info}[2][1=]{\todo[linecolor=OliveGreen,backgroundcolor=OliveGreen!25,bordercolor=OliveGreen,#1]{#2}}
+\newcommandx{\improvement}[2][1=]{\todo[linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum,#1]{#2}}
+\newcommandx{\thiswillnotshow}[2][1=]{\todo[disable,#1]{#2}}
+
+\newcommand{\fig}{Fig.}
+\newcommand{\panda}{\textsc{$\overline{\textsc{P}}$anda}}
+\newcommand{\PANDA}{\panda}
+\newcommand{\fair}{FAIR}
+\newcommand{\btof}{B-ToF}
+\newcommand{\btofD}{B-ToF detector}
+\newcommand{\SciTil}{\btof}
+\newcommand{\btofLong}{Barrel Time-of-Flight Detector}
+\newcommand{\btofLongD}{Barrel Time-of-Flight Detektor}
+\newcommand{\bdirc}{Barrel DIRC}
+\newcommand{\ddirc}{Disc DIRC}
+\newcommand{\sm}{Super-Module}
+\newcommand{\sensorboard}{Sensor-Board}
+\newcommand{\railboard}{Rail-Board}
+\newcommand{\hamamatsu}{Hamamatsu}
+\newcommand{\ketek}{Ketek}
+\newcommand{\advansid}{AdvanSiD}
+\newcommand{\antiproton}{anti-proton}
+\newcommand{\sipm}{SiPM}
+\newcommand{\sipms}{SiPM's}
+\newcommand{\proot}{PandaRoot}
+
+\author{Sebastian Zimmermann, Svetlana Chesnevskya}
+\title{The Barrel Time-Of-Flight Detector}
+
+\begin{document}
+
+\maketitle
+
+\section*{Aim of the Document}
+The aim of this document is to give a broad overview of the detector summarizing and expanding on the established Technical Design Report written by K. Suzuki et al.
+
+\tableofcontents
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+
+The \btofD\ is a scintillating tile hodoscope which used to be referred to as the \emph{SciTil}. It fulfills many functions to support the successful operation of the \panda\ detector. It provides:
+\begin{enumerate}[I]
+	\item	information for particle identification at low momenta (below the Cherenkov threshold)
+	\item	position resolution for track seeding
+	\item	timing information to separate individual events in the stream of data
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The \btof\ Detector Hardware}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Infrastructure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Capabilities}
+
+The content of this section is mainly based on work done by Dominik Steinschaden. \unsure{irrelevant}
+
+The presented capabilities are all based on performance simulations using PandaRoot. The timing based analysis of this detectors data combined with momentum and track information from other detectors allows the \btofD\ to contribute two main features; event building and particle identification.
+
+\subsection{Event Building}
+
+Since \panda\ will not be equipped with a start time detector, the first challenge will be to group relevant hits into single events. This will have to be done before any further analysis of the data stream is possible. For this it is both important to capture all relevant hits and exclude all hits from other events.
+
+For this step the time resolution of the respective detector is the qualifying factor. With average event rates in the high luminosity mode of up to \SI{20}{MHz}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Performance Validation}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Calibration}
+
+\subsection{Ongoing Performance Monitoring}
+
+To ensure hardware component issues are detected early the system is supposed to be monitored by small LED's mounted in between the \sipms .
+
+\subsection{Position Calibration}
+
+\subsection{Time Resolution Expectancy along the Board}
+
+\subsection{Signal delay along the Board}
+
+\subsection{Amplitude drop along the Board}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Readout}
+
+Foreseen is a readout with the TOFPET ASIC by PETsys Electronics.
+
+
+\newpage
+\listoftodos
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
