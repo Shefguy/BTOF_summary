@@ -20,9 +20,10 @@
 
 \usepackage{graphicx}
 \graphicspath{{./Bilder/}}
-\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[left=2cm,right=3cm,top=2cm,bottom=2cm]{geometry}
 
 \usepackage{xargs}                      % Use more than one optional parameter in a new commands
+\setlength {\marginparwidth }{2.6cm}
 \usepackage[colorinlistoftodos,prependcaption,textsize=tiny,textwidth=\linewidth/1.0]{todonotes}
 \newcommandx{\unsure}[2][1=]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red,#1]{#2}}
 \newcommandx{\abbreviation}[2][1=]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,#1]{#2}}
@@ -79,10 +80,68 @@ The \btofD\ is a scintillating tile hodoscope which used to be referred to as th
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The \btof\ Detector Hardware}
 
+The \btofD\ consists of 16 elements arranged symmetrically around the \panda\ interaction point. Each of these elements is called a super-module and comprises four main parts.
+
+\begin{itemize}
+	\item Active Medium (Scintillator Tiles)
+	\item Photon Readout (\sipm)
+	\item Signal Transmission (PCB / \railboard )
+	\item Enclosure (Carbon Fiber)
+\end{itemize}
+
+A single large PCB or a PCB split into a front and back part connect the Front End Electronics (FEE) to the detector elements. 
+Each super-module is equipped with 60 scintillator tiles in two rows, read out by four \sipms\ on each side of the scintillator. 
+This adds up to 3840 channels with a total amount of \num{15360} deployed \sipms .
+
+\subsection{Scintillator}
+Each scintillator of the \btofD\ is identical to the others and have the following dimensions; \SI{87 x 29.4 x 5}{mm}.
+To fit inside the holding structure the corners of the scintillator tiles are truncated.
+
+The scintillator of choice for the detector dimensions is the EJ-232 by Eljen Technology. It is an organic scintillator compound developed for high accuracy timing applications. \todo{add reference or more info}
+
+\subsection{\sipm}
+
+\subsection{\railboard}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Infrastructure}
 
+\subsection{Power Supply}
+
+The two main devices that need to be powered are the FEE and the \sipms .
+The FEE as they are foreseen at the moment require a \SI{12}{V} supply.
+The needs of the \sipms\ depend on the chosen \sipm\ model. Since four \sipms\ are connected in series and the necessary applied voltage adds up, small differences in the operational voltage of individual \sipms\ can change the requirements on the power supply.
+
+In case \hamamatsu\ \sipms\ with an operational voltage of \SI{\sim 60}{V} are used the power supply is required to deliver voltages upwards of \SI{240}{V}.
+
+The TOFPET ASIC system that is foreseen as the base of the FEE is equipped with an internal power supply however only capable of delivering voltages up to around \SI{90}{V}.
+As shown this might not be sufficient.
+In this case an external power source is required.
+
+The performance of the \sipms\ is also dependant on the applied overvoltage\unsure{does this need explaining?}.
+Since the manufacturing of the \sipms\ is not perfect slight variations in the breakdown voltages of every \sipm\ are to be expected.
+These variations lead to differences in the applied overvoltage and would need to be adjusted for to ensure identical performance of every detector module, meaning individual power supply channels for every readout channel.
+This however is not feasible for the 3840 channels of the detector.
+
+Alternatively multiple detector module can be connected to the same biasing line.
+Measurements done in Erlangen with \hamamatsu\ xxx\todo{add sipm model} \sipms\ to determine the optimal bias voltage for each side of the detector showed a slight performance dependance.
+If the \sipms\ are pre-sorted and grouped by breakdown voltage the overvoltage mismatch can be minimized.
+
+\subsection{Light Tight Enclosure}
+
+To ensure minimal noise from stray photons the detector super-modules need to be packed in a light tight enclosure.
+Similar to the \bdirc\ it is foreseen that the carbon holding frame will act as the photon barrier.
+
+\subsection{Water Cooling of FEE}
+
+The main active component of the \btofD\ is the FEE placed at the end of the detector in front of the interaction point. As the main heat source of the detector it is foreseen to be water cooled.
+\todo[inline]{What power draw does the TOFPET ASIC FEB/D have? This needs to be included.}
+
+\subsection{Air Cooling}
+
+Although there is a minimal amount of electrical components placed along the \railboard\ some heat will still be generated; mainly by the \sipms .
+Since the \sipm\ performance also is very dependant on the temperature a slight draft of pressured air along the \railboard\ should keep everything dry and produce a constant temperature.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Capabilities}
@@ -139,6 +198,12 @@ Thereby identifying the particle species.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Performance Validation}
+
+\subsection{Time Resolution Surface Scans}
+
+To ensure a performance as homogeneous as possible over the entire scintillator surface the time resolution was measured at multiple points along the scintillator surface.
+
+These scans were performed at the University of Erlangen in collaboration with the group of A. Lehmann.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
