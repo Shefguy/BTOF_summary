@@ -2,6 +2,7 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
+\usepackage{subfiles}			% for multi-document support
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
@@ -69,272 +70,23 @@ The aim of this document is to give a broad overview of the detector summarizing
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Introduction}
-
-The \btofD\ is a scintillating tile hodoscope which used to be referred to as the \emph{SciTil}. It fulfills many functions to support the successful operation of the \panda\ detector. It provides:
-\begin{enumerate}[I]
-	\item	information for particle identification at low momenta (below the Cherenkov threshold)
-	\item	position resolution for track seeding
-	\item	timing information to separate individual events in the stream of data
-\end{enumerate}
+% 					section Introduction
+\subfile{./Introduction/Introduction.tex}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The \btof\ Detector Hardware}
-
-The \btofD\ consists of 16 elements arranged symmetrically around the \panda\ interaction point. Each of these elements is called a super-module and comprises four main parts.
-
-\begin{itemize}
-	\item Active Medium (Scintillator Tiles)
-	\item Photon Readout (\sipm)
-	\item Signal Transmission (PCB / \railboard )
-	\item Enclosure (Carbon Fiber)
-\end{itemize}
-
-A single large PCB or a PCB split into a front and back part connect the Front End Electronics (FEE) to the detector elements. 
-Each super-module is equipped with 60 scintillator tiles in two rows, read out by four \sipms\ on each side of the scintillator. 
-This adds up to 3840 channels with a total amount of \num{15360} deployed \sipms .
-
-\subsection{Scintillator}
-Each scintillator of the \btofD\ is identical to the others and have the following dimensions; \SI{87 x 29.4 x 5}{mm}.
-To fit inside the holding structure the corners of the scintillator tiles are truncated.
-Each chamfer is set at \SI{3}{mm}.
-This is a change from the design proposed in the Technical Design Report (TDR) which had rectangular scintillators.
-
-The performance impact of this change was studied using a strontium source on a mechanized arm, comparing time resolution measurements of cut and uncut scintillator tiles.\todo[inline]{The measurements of Svetlana need to be integrated here}
-As shown in \fig\ \todo{add figure} the bulk of the material shows little to no significant difference.
-The time resolution of events in the corners... \todo{finish this paragraph}
-
-\subsubsection*{Material}
-The scintillator of choice for the detector dimensions is the EJ-232 by Eljen Technology. It is an organic scintillator compound developed for high accuracy timing applications \footnote{\url{https://eljentechnology.com/products/plastic-scintillators/ej-232-ej-232q}}. \todo{add reference or more info}
-The equivalent Saint-Gobain/Bicron equivalent product would be the BC-422 scintillator.
-%Due to the short emission wavelength the mean free path inside of the scintillator is only around \SI{10}{cm}.
-
-Measurements comparing the scintillator thickness revealed stark differences in performance between \SI{3}{mm} and \SI{6}{mm} thick tiles. 
-Under ideal circumstances, for equal readout surface and constant energy loss of passing particles, the number of detected photons is independent of the thickness.
-However, since the number of internal reflections is increased for thinner tiles, more photons are lost at the scintillator surface compared to thicker modules.
-This leads to a significant time resolution increase when reducing the tile thickness as can be seen in \fig ~\ref{fig:Tchickness_timeRes}.
-Since the performance difference between \SIlist[]{5;6}{mm} is minimal and the material budget of the device needs to be kept at a minimum the detector will be equipped with \SI{5}{mm} thick tiles.
-
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=.7\textwidth]{fig/TimeResSummary.png}
-	\caption{Time resolution measurement comparing different thicknesses of aluminized mylar wrapped scintillator tiles.}
-	\label{fig:Tchickness_timeRes}
-\end{figure}
-
-\subsubsection*{Wrapping}
-Since the time resolution of a scintillator detector is coupled to the number of detected photons, the scintillator tiles are wrapped in order to reflect photons that escape the scintillator back into it.
-The material choice was subject to tests performed on a scintillator tile using a \sr\ source in order to determine the best performing wrapping.
-Material candidates were aluminized mylar foil, Tyvek hardstructure 1057D, enhanced specular reflector (ESR), Teflon tape, aluminum foil and no wrapping.
-As can be seen in Table~\ref{tab:WrappingTest}, taken from the \btof\ TDR\todo[]{add Ref to TDR}, the performance difference was within \SI{6.7}{ps} from the best to the worst performing wrapping and a standard deviation of \SI{2.23}{ps}.
-
-\begin{table*}[htbp]
-	\caption[Time resolution for different wrapping materials]{Time resolution of EJ-232 (top) and EJ-228 (bottom) plastic scintillator tiles for various wrapping materials.
-		\label{tab:WrappingTest}}
-	\centering
-	%\resizebox{0.8\textwidth}{!}
-	{
-		\begin{tabular}{ l  c  c }
-			\toprule
-			Wrapping material                 & Time resolution [ps] & Number of detected photons \\
-			\midrule
-			No wrapping                       & 55.0\,$\pm$\,0.3     & 288\,$\pm$\,2\\
-			Aluminized Mylar foil             & 52.7\,$\pm$\,0.3     & 355\,$\pm$\,2\\
-			Tyvek hardstructure 1057D         & 55.0\,$\pm$\,0.3     & 394\,$\pm$\,3\\
-			Enhanced specular reflector (ESR) & 55.2\,$\pm$\,0.3     & 355\,$\pm$\,3\\
-			Teflon tape                       & 59.4\,$\pm$\,0.3     & 408\,$\pm$\,4\\
-			Aluminum foil                     & 54.2\,$\pm$\,0.3     & 344\,$\pm$\,3\\
-			\midrule
-		\end{tabular}
-	}
-\end{table*}
-
-Surprisingly, Teflon tape, the by far worst performing wrapping, produced the largest amount of detected photons.
-The best performing material and the only one better than no wrapping at all was the aluminized mylar foil.
-This can be attributed to the type of reflection.
-While aluminized mylar has a mirror like finish, the other materials produce diffuse reflections.
-This leads to larger distances travelled by the photons before reaching the photo detectors.
-
-The wrapping material of choice for the scintillator tile of the \btofD\ is aluminized mylar.
-
-
-\subsection{\sipm}
-
-To detect the photons produced in the scintillators a device is needed that fits into the limited space available to the detector, can operate within a strong magnetic field and delivers a good time resolution.
-A sensor that fits these criteria is the Silicon Photomultiplier (\sipm ).
-These small devices are available in multiple sizes.
-Best suited for the \btofD\ is an effective photosensitive area of \SI{3x3}{mm} with a thickness in the order of \SI{1.5}{mm}.
-
-Multiple manufacturers offer sensors of such kind including \hamamatsu, \ketek and \advansid\ each with slightly different operational parameters.
-One main point to consider is the operational voltage which differs greatly between manufacturers.
-While \hamamatsu\ \sipms\ are operated at around \SI{60}{V}, \ketek\ \sipms\ only require a bias voltage of around \SI{30}{V}.
-Since the sensors will be connected in series as described in Section \todo{add section on SiPM serial connection}, the operational voltage is 4 times the single sensor voltage, which affects the requirements from necessary electronics to drive the sensors.
-
-The final choice on which \sipm\ model to use has not been made since the development of \sipms\ moves relatively fast and new product generations were expected.
-Tested sensors include the \texttt{S13360-3050PE} by \hamamatsu, the \texttt{PM3350} by \ketek\ and the \texttt{ASD-NUV3S-P} by \advansid , which all perform adequately.
-
-\subsubsection*{Serial connection of 4 \sipms}
-
-In order to effectively readout the \SI{5x30}{mm} large surface area of the ends of the scintillator tile, the active surface needs to be extended beyond a single \sipm\ with an effective photosensitive are of \SI{3x3}{mm}.
-To do this four \sipms\ are connected in series.
-This offers a larger active area without increasing the detector complexity by adding unnecessary channels by reading out the \sipms\ individually.
-
-Additionally connecting the sensors in series in contrast to a parallel connection, offers an improvement of the signal timing properties.
-The slope of the rising signal flank, which determines the signals timing susceptibility to electrical noise, depends on the sensors internal capacitance.
-A smaller capacitance leads to a faster sensor discharge and a steeper signal slope.
-Connecting the sensors in series decreases this internal capacitance making the signal faster whereas a parallel connection would have the opposite effect.
-
-There is evidence suggesting, that increasing the amount of \sipms\ from 4 to 6 would improve the time resolution.
-These tests however were performed at a time where the scintillator was held in place differently and hence was not chamfered.
-Cutting away \SI{3}{mm} from either edge reduces the available space to \SI{24}{mm}.
-With the actual width of each \sipm\ is slightly below \SI{4}{mm} and an LED between the middle two sensors, there simply is not enough room for additional sensors.
-
-\subsection{\railboard}
-
-The solution to connect the photo sensors to the FEE and provide mechanical support at the same time is the \railboard . It is a long PCB
-
-
+\subfile{./Detector_Hardware/Detector_Hardware.tex}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Infrastructure}
-
-\subsection{Power Supply}
-
-The two main devices that need to be powered are the FEE and the \sipms .
-The FEE as they are foreseen at the moment require a \SI{12}{V} supply.
-The needs of the \sipms\ depend on the chosen \sipm\ model. Since four \sipms\ are connected in series and the necessary applied voltage adds up, small differences in the operational voltage of individual \sipms\ can change the requirements on the power supply.
-
-In case \hamamatsu\ \sipms\ with an operational voltage of \SI{\sim 60}{V} are used the power supply is required to deliver voltages upwards of \SI{240}{V}.
-
-The TOFPET ASIC system that is foreseen as the base of the FEE is equipped with an internal power supply however only capable of delivering voltages up to around \SI{90}{V}.
-As shown this might not be sufficient.
-In this case an external power source is required.
-
-The performance of the \sipms\ is also dependant on the applied overvoltage\unsure{does this need explaining?}.
-Since the manufacturing of the \sipms\ is not perfect slight variations in the breakdown voltages of every \sipm\ are to be expected.
-These variations lead to differences in the applied overvoltage and would need to be adjusted for to ensure identical performance of every detector module, meaning individual power supply channels for every readout channel.
-This however is not feasible for the 3840 channels of the detector.
-
-Alternatively multiple detector module can be connected to the same biasing line.
-Measurements done in Erlangen with \hamamatsu\ xxx\todo{add sipm model} \sipms\ to determine the optimal bias voltage for each side of the detector showed a slight performance dependance.
-If the \sipms\ are pre-sorted and grouped by breakdown voltage the overvoltage mismatch can be minimized.
-
-\subsection{Light Tight Enclosure}
-
-To ensure minimal noise from stray photons the detector super-modules need to be packed in a light tight enclosure.
-Similar to the \bdirc\ it is foreseen that the carbon holding frame will act as the photon barrier.
-
-\subsection{Water Cooling of FEE}
-
-The main active component of the \btofD\ is the FEE placed at the end of the detector in front of the interaction point. As the main heat source of the detector it is foreseen to be water cooled.
-\todo[inline]{What power draw does the TOFPET ASIC FEB/D have? This needs to be included.}
-
-\subsection{Air Cooling}
-
-Although there is a minimal amount of electrical components placed along the \railboard\ some heat will still be generated; mainly by the \sipms .
-Since the \sipm\ performance also is very dependant on the temperature a slight draft of pressured air along the \railboard\ should keep everything dry and produce a constant temperature.
-
+\subfile{./Infrastructure/Infrastructure.tex}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Capabilities}
-
-The content of this section is mainly based on work done by Dominik Steinschaden.
-For a closer look at the exact methodology behind these concepts and further understanding of the limitations of these processes, the reader is advised to reference The \btof\ TDR (2017) and the dissertation \emph{"Optimization Studies and Performance Simulations for the Time-of-Flight System of PANDA"} (2018)¸ by D. Steinschaden.\unsure{is this relevant?}
-
-The presented capabilities are all based on performance simulations using PandaRoot. The timing based analysis of this detectors data combined with momentum and track information from other detectors allows the \btofD\ to contribute two main features; event building and particle identification.
-
-\subsection{Event Building}
-
-Since \panda\ will not be equipped with a start time detector, the first challenge will be to group relevant hits into single events. This will have to be done before any further analysis of the data stream is possible. For this it is both important to capture all relevant hits and exclude all hits from other events.
-
-For this step the time resolution of the respective detector is the qualifying factor. With average event rates in the high luminosity mode of up to \SI{20}{MHz} or respectively at intervals of of \SI{50}{ns} and individual events at even smaller intervals, an excellent time resolution is required to avoid overlap of relevant detector hits. \fig~\ref{fig:Event_overlap} illustrates the difference a time resolution of \SI{100}{ps} makes compared to a time resolution of \SI{2}{ns}, where hits of multiple events overlap and can not be disentangled.
-
-\begin{figure}
-	\centering
-	\includegraphics[width = .9\textwidth]{fig/Event_overlap.pdf}
-	\caption{Simulation of the hit distribution for an average interaction rate of \SI{50}{MHz} and a detector resolution of \SI{0.1}{ns} and \SI{2}{ns} respectively.}
-	\label{fig:Event_overlap}
-\end{figure}
-
-\todo[inline]{How exactly this works is in Dominiks Dissertation and needs to be added}
-
-\subsection{Particle Identification and Event Time Determination}
-
-Usually these two tasks are separated and handled by dedicated detectors.
-After a start time is determined and a time stamp for a detector hit can be established, the time-of-flight of the respective particle can be calculated.
-Combining this information with trajectory length and momentum information provided by the tracking detectors a velocity and hence a mass and particle identity can be determined.
-Since \panda\ however has no start time detector, the event time has to be implicitly determined, by combining information of multiple detector hits and various detectors.
-The technique used for this is called \emph{Relative Time-of-Flight} and delivers the event time and the respective particle identities of all involved hits simultaneously.
-
-If a hit is registered in the \btofD\ it can not be a very short lived particle due to its radial distance of about \SI{50}{cm} to the interaction point.
-This leaves a limited selection of possible particle candidates.
-For grouped hits belonging to a single event the procedure is illustrated in \fig ~\ref{fig:relToF}.
-Using tracking and momentum information from other detectors, the corresponding interaction time ($t_0$) in the interaction point of every \btof\ hit, can be calculated.
-Iterating through all possible mass assumptions produces a distribution of possible $t_0$.
- 
-\begin{figure}
-	\centering
-	\includegraphics[width=.9\textwidth]{fig/relTof_basic.pdf}
-	\caption{The relative time of flight method works by taking multiple mass assumptions of all involved detector hits here marked with blue lines on the time axis. Different
-particles show differences in their time-of-flight for the same momentum and trajectory
-due to differences in their mass and hence velocity. For these assumptions the respective
-interaction or creation time ($t_0$) is calculated and shown color coded; green for the first and
-red for the second hit. Where interaction times align we assume to have found $t_0$.}
-	\label{fig:relToF}
-\end{figure}
-
-Since all hits belong to the same event a cluster of possible $t_0$ values with one candidate from every hit, should emerge.
-Taking the mean of these candidate times in the cluster provides us with an estimation of the interaction time, as well as assigning the most likely particle mass to all involved particles.
-Thereby identifying the particle species.
-
-
+\subfile{./Capabilities/Capabilities.tex}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Performance Validation}
-
-\subsection{Time Resolution Surface Scans}
-
-To ensure a performance as homogeneous as possible over the entire scintillator surface the time resolution was measured at multiple points along the scintillator surface.
-
-These scans were performed at the University of Erlangen in collaboration with the group of A. Lehmann.
-
-
+\subfile{./Performance_Validation/Performance_Validation.tex}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Calibration}
-
-\subsection{Ongoing Performance Monitoring}
-
-To ensure hardware component issues are detected early the system is supposed to be monitored by small LED's mounted in between the \sipms .
-Short bursts of light injected into one side of the scintillator at a time will provide a stable signal source.
-Changes in the measured amplitude indicates either an efficiency loss in the scintillator or a gain drop of the involved \sipms .
-These signals also act as a reference point in order to determine the time resolution of the detector elements while they are deployed.
-
-It is foreseen to have four channels for all the LED's on one \railboard .
-This allows for every other LED on a single side along the board to be illuminated, leaving a dark scintillator between two illuminated scintillators.
-This ensures the signal is only produced by the internal light with no light bleed from a neighboring tile.
-By only illuminating one side \todo{what is the benefit of this?}
-
-\subsection{Position Calibration}
-
-In order to deliver useful position information for the detector hits the exact position of each tile in the context of the detector needs to be determined.\unsure{this is probably done by in the commissioning phase of the detector setup for the whole experiment.}
-The position of the individual scintillator tiles is mainly of interest in the context of the time resolution, signal delay and amplitude drop along the board which are discussed in the following sections.
-
-\subsubsection{Time Resolution Expectancy along the Board}
-
-Since the time resolution is affected by signal noise and decreases of the slope of the rising flank it can be expected to receive a worse time resolution for scintillators farther down the \railboard\ with a longer distance between the detector element and the Front End Electronics.
-In order to create a baseline for the detector performance the time resolution needs to be measured along the length of the \railboard .
-
-\subsubsection{Signal Delay along the Board}
-
-In order to provide an accurate time stamp for hits in the \btofD\ the time a signal needs to travel from the \sipms\ to the FEE has to be taken into account. The longer the electrical connection line is the larger the time delay between detector hit and time stamp in the electronics.
-
-The speed a signal travels through a copper connection is significantly slower than the speed of light.
-
-\subsubsection{Amplitude Drop along the Board}
-
-
+\subfile{./Calibration/Calibration.tex}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Readout}
+\subfile{./Readout/Readout.tex}
 
-Foreseen is a readout with the TOFPET ASIC by PETsys Electronics.
 
 
 \newpage
