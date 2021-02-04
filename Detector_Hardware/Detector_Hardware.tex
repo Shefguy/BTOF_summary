@@ -131,6 +131,21 @@ Two of these boards are connected by ribbon cables to connect one full row of 60
 	\label{fig:Railboard}
 \end{figure}
 
+Each board consists of 16 conductor layers alternating between shielding ground layers, which span the almost the entire layer and signal transmission lines, which can be seen in \fig ~\ref{fig:Railboard3_schematic}.
+Since resistive losses at the relevant frequencies are dominated by the skin effect it is necessary to keep the conductor surface as large as possible.
+In order to maximize the conductor surface while minimizing the material budget all conductor layers are kept as thin as possible with a thickness of \SI{17}{\micro \meter}.
+For the purposes of minimizing reflection losses, the characteristic impedance of the whole board was kept around \SI{50}{\ohm}.
+For this the relation between the width of the transmission lines and the substrate thickness had be calculated.
+Since vertical space is limited a laminate thickness of \SI{0.406}{mm} was chosen which mandates a trnasmission line width of \SI{400}{\micro m}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=.9\textwidth]{fig/Railboard3_schematic.pdf}
+	\caption{Schematic of the internal layout of the \railboard\ conductors. The board substrate material is left blank.}
+	\label{fig:Railboard3_schematic}
+\end{figure}
+
+% low loss material
 \sipm\ signals with a rise time of \SI{3}{ns} correspond to a frequency of \SI{167}{MHz}.
 At this frequency dielectric losses start to take on a larger portion of the electric losses experienced along a transmission line\footnote{more information in the dissertation of S. Zimmermann}.
 To reduce these losses special PCB substrate materials have been developed such as RO4003C by Rogers Corp.
