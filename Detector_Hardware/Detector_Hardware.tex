@@ -4,11 +4,12 @@
 
 \section{The \btof\ Detector Hardware}
 
-The \btofD\ consists of 16 elements arranged symmetrically around the \panda\ interaction point. Each of these elements is called a \sm\ and comprises four main parts.
+The \btofD\ consists of 16 elements arranged symmetrically around the \panda\ interaction point. Each of these elements is called a \sm\ and comprises five main parts.
 
 \begin{itemize}
 	\item Active Medium (Scintillator Tiles)
 	\item Photon Readout (\sipm)
+	\item \sensorboard\ (flex PCB holding \sipms )
 	\item Signal Transmission (PCB / \railboard )
 	\item Enclosure (Carbon Fiber)
 \end{itemize}
@@ -114,6 +115,59 @@ These tests however were performed at a time where the scintillator was held in 
 Cutting away \SI{3}{mm} from either edge reduces the available space to \SI{24}{mm}.
 With the actual width of each \sipm\ is slightly below \SI{4}{mm} and an LED between the middle two sensors, there simply is not enough room for additional sensors.
 
+\subsection{\sensorboard}
+
+To connect the \sipms\ to the readout they are soldered onto a flex PCB called the \sensorboard .
+It not only holds the photon sensors but also the temperature sensor and a calibration LED.
+To establish a secure connection between the \sipms\ and the scintillator it is glued onto the scintillator tile as seen in \fig~\ref{fig:SensorBoradNew}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[height=5cm]{fig/SensorBoardNew2.png}
+	\includegraphics[height=5cm]{fig/Sensorboards2Scintillator.jpg}
+	\includegraphics[height=5cm]{fig/Sensorboards2Scintillator2.jpg}
+	\caption[The flexible \sensorboard .]{A flexible \sensorboard\ featuring four \sipms\ in series, a temperature sensor and an LED (left), attached to a scintillator (middle) and a full active module (right).}
+	\label{fig:SensorBoradNew}
+\end{figure}
+
+The LED is supposed to function as a calibration and monitoring device during the operation of the detector.
+Calibrated signals are produced by flashing the LED and any change in amplitude or time resolution can be picked up and monitored for changes.
+The development of this procedure was subject of the work of a masters student who however never finished.
+Since then the first idea has not been developed.
+
+It would be necessary to determine the best way to drive the LEDs in order to produce a short and well defined signal. 
+This includes the optimal voltage and duration of the driving signal, as well as determining what LED specifically would be optimal.
+In general it is best to keep the emitted wavelengths as close to the scintillator light as possible to monitor the relevant performance.
+Ultimately this development would need to be made in combination with finalizing the electronics for whole system.
+
+Important findings during the testing of this new board is that the thin copper lines are very fragile.
+Multiple strong bends can sever the connection between the \sipms\ and the \railboard .
+For this reason it is important to handle these boards with care.
+To remedy this the transition of the \sipm\ solder pad to the transmission line was changed from a strict \ang{90} corner to a smoother teardrop shaped junction.\todo[]{add info on how this change affected the reliability of the boards}
+\todo[inline]{the first version of these boards what not propperly impedance matched. The second version should be by increasing transmission line width and adding a copper back plane.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Temperature Sensor}
+In order to monitor the climate the scintillator tiles and the \sipms\ are subject to, every sensor board is equipped with a temperature sensor. It was important that these devices can be read out using a minimal amount of channels or transmission lines to keep the material budget and \railboard\ occupancy at a minimum.
+An individual channel for all 240 \sensorboard s per \sm\ would also overload the readout system.
+
+A solution to this is a digital temperature sensor on a 1-Wire bus.
+This bus offers the capability to connect a large amount of sensors in parallel, only requiring a ground, signal and power supply line.
+Such a sensor which is used on the \sensorboard s is the \texttt{DS18B20} by \textit{Maxim Integrated}.
+These sensors can be controlled by a micro controller and utilize a hard coded 48-bit address for each sensor, which far exceeds the number of necessary sensors for one \railboard .
+To power them a bias voltage between \SIrange[]{3}{5.5}{V} is required.
+A schematic of the connection of such sensors can be seen in \fig ~\ref{fig:DS18B20_connection}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=.6\textwidth]{fig/DS18B20_connection.png}
+	\caption[Connection scheme for the DS18B20 temperature sensor.]{Connection scheme for the DS18B20 temperature sensor connected to a micro processor (µP).}
+	\label{fig:DS18B20_connection}
+\end{figure}
+
+\todo[inline]{add more info from Bernds thesis concerning function of the sensor. How long does it take to read out, etc}
+
+
 \subsection{\railboard}
 
 The solution to connect the photo sensors to the FEE and provide mechanical support at the same time is the \railboard .
@@ -122,7 +176,7 @@ It is a long PCB split into two parts due to availability issues of the base mat
 Previous designs relied solely on the mechanical support of a single \railboard\ spanning the entirety of a \sm\ to hold all components including the scintillators in place.
 Due to stability issues and too small tolerances in the connectors the form of the board has been redesigned and a carbon frame has been added.
 The single \railboard\ is replaced by four large PCB's, one of which is shown in \fig ~\ref{fig:Railboard}.
-Two of these boards are connected by ribbon cables to connect one full row of 60 scintillators to the FEE.
+Two of these boards are attached by ribbon cables to connect one full row of 60 scintillators to the FEE and held in place by plastic screws to the carbon frame.
 
 \begin{figure}
 	\centering
@@ -136,7 +190,7 @@ Since resistive losses at the relevant frequencies are dominated by the skin eff
 In order to maximize the conductor surface while minimizing the material budget all conductor layers are kept as thin as possible with a thickness of \SI{17}{\micro \meter}.
 For the purposes of minimizing reflection losses, the characteristic impedance of the whole board was kept around \SI{50}{\ohm}.
 For this the relation between the width of the transmission lines and the substrate thickness had be calculated.
-Since vertical space is limited a laminate thickness of \SI{0.406}{mm} was chosen which mandates a trnasmission line width of \SI{400}{\micro m}.
+Since vertical space is limited a laminate thickness of \SI{0.406}{mm} was chosen which mandates a transmission line width of \SI{400}{\micro m}.
 
 \begin{figure}
 	\centering
@@ -150,6 +204,39 @@ Since vertical space is limited a laminate thickness of \SI{0.406}{mm} was chose
 At this frequency dielectric losses start to take on a larger portion of the electric losses experienced along a transmission line\footnote{more information in the dissertation of S. Zimmermann}.
 To reduce these losses special PCB substrate materials have been developed such as RO4003C by Rogers Corp.
 This is the material that is used for the \btof\ \railboard\ to ensure minimal losses for an optimal performance.
+Since RO4003C sheets are not available beyond 48 inches or \SI{1.224}{m} the boards need to be split into a front and back part each holding 30 scintillators.
+The mentioned size is the standard sheet size.
+We did not make inquiries to determine whether larger nonstandard sizes were available.
+Since the board is split already and requires external support it only makes sense to separate the scintillator rows along the long axis.
+This gives the detector a higher degree of modularity and makes installation and swapping of components easier.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Connectors}
+
+The board is equipped with three types of connectors, that 
+\begin{enumerate*}[I) ]
+	\item  connect the two halves of the \railboard\ to one another, 
+	\item the \sensorboard s to the \railboard\ and 
+	\item establishes a connection between the \railboard\ and the TOFPET ASIC.
+\end{enumerate*}\todo[]{maybe make this a bulleted list for better readibility.}
+
+The connectors for the ribbon cables between the boards are \todo[]{ask Gerhard}. However the pitch size of connectors differ depending on if the carry \sipm\ signals or merely power.
+Since there are many more signal lines on the \railboard\ than power lines, these have higher pitched connectors.
+If the number of power lines is to be increased this could be changed.
+It however is important to keep in mind that the higher the pitch of the connector, the closer each line is to one another physically limiting the voltage it can successfully sustain.
+\todo[inline]{add picture of cable and connectors.}
+
+Similar connectors are used for the \sensorboard s. These are also connected via flat ribbon cable connectors. The model used is a zero insertion force connector by Samtec (\texttt{ZF1-10-01-T-WT-TR}) depicted in \fig~\ref{fig:SensorBoard_connector} with a naked \sensorboard .
+To open the connector the black plastic tab is pulled out.
+After the \sensorboard\ is inserted or extracted the black tab is pushed closed to fasten the board inside and establish a secure connection.
+\todo[inline]{add more info on the connectors.}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=.5\textwidth]{fig/SensorBoard_connector.png}
+	\caption{Zero insertion force connector by Samtec used to connect the depicted \sensorboard\ to the \railboard .}
+	\label{fig:SensorBoard_connector}
+\end{figure}
 
 
 
