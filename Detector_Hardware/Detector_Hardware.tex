@@ -201,7 +201,7 @@ Since vertical space is limited a laminate thickness of \SI{0.406}{mm} was chose
 
 % low loss material
 \sipm\ signals with a rise time of \SI{3}{ns} correspond to a frequency of \SI{167}{MHz}.
-At this frequency dielectric losses start to take on a larger portion of the electric losses experienced along a transmission line\footnote{more information in the dissertation of S. Zimmermann}.
+At this frequency dielectric losses start to take on a larger portion of the electric losses experienced along a transmission line\footnote{more information in the dissertation "Development of the Fast Timing \panda\ Barrel Time-of-Flight Detector" by S. Zimmermann}.
 To reduce these losses special PCB substrate materials have been developed such as RO4003C by Rogers Corp.
 This is the material that is used for the \btof\ \railboard\ to ensure minimal losses for an optimal performance.
 Since RO4003C sheets are not available beyond 48 inches or \SI{1.224}{m} the boards need to be split into a front and back part each holding 30 scintillators.
@@ -220,13 +220,39 @@ The board is equipped with three types of connectors, that
 	\item establishes a connection between the \railboard\ and the TOFPET ASIC.
 \end{enumerate*}\todo[]{maybe make this a bulleted list for better readibility.}
 
-The connectors for the ribbon cables between the boards are \todo[]{ask Gerhard}. However the pitch size of connectors differ depending on if the carry \sipm\ signals or merely power.
+\textbf{I)} The connectors for the ribbon cables between the boards as well as the connectors for the \sensorboard s are FFC/FPC\footnote{Flex Flat Cable / Flex Printed Circuit} connectors.
+To connect the two \railboard halves, as shown in \fig ~\ref{fig:Railboard_connection} two distinct FFC connectors are used.
+Transmission lines which carry detector signals are connected via the \texttt{FH28-60S-0.5SH} connector by Hirose Electric Group, which is depicted in \fig~\ref{fig:Railboard_connector}.
+Connections for the power delivery and the temperature sensors are connected using the \texttt{ZF1-25} by Samtec, shown in \fig~\ref{fig:Railboard_power_connection}.
+The main difference between the two connectors is the pitch size of connectors pins.
 Since there are many more signal lines on the \railboard\ than power lines, these have higher pitched connectors.
 If the number of power lines is to be increased this could be changed.
 It however is important to keep in mind that the higher the pitch of the connector, the closer each line is to one another physically limiting the voltage it can successfully sustain.
 \todo[inline]{add picture of cable and connectors.}
 
-Similar connectors are used for the \sensorboard s. These are also connected via flat ribbon cable connectors. The model used is a zero insertion force connector by Samtec (\texttt{ZF1-10-01-T-WT-TR}) depicted in \fig~\ref{fig:SensorBoard_connector} with a naked \sensorboard .
+\begin{figure}
+	\centering
+	\includegraphics[width=.7\textwidth]{fig/Railboard_Connection_filter.png}
+	\caption{Connection between the \railboard\ halves.}
+	\label{fig:Railboard_connection}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[height=5cm]{fig/LargeConnector_cable_crop.jpg}
+	\includegraphics[height=5cm]{fig/hirose_connector_drawing.png}
+	\caption{Foto and drawing of the \railboard\ connector for the ribbon cable between boards.}
+	\label{fig:Railboard_connector}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[height=5cm]{fig/Connector_ZF1-25-01.png}
+	\caption{Connector for power between \railboard s.}
+	\label{fig:Railboard_power_connection}
+\end{figure}
+
+\textbf{II)} Similar connectors are used for the \sensorboard s. These are also connected via flat ribbon cable connectors. The model used is a zero insertion force connector by Samtec (\texttt{ZF1-10-01-T-WT-TR}) depicted in \fig~\ref{fig:SensorBoard_connector} with a naked \sensorboard .
 To open the connector the black plastic tab is pulled out.
 After the \sensorboard\ is inserted or extracted the black tab is pushed closed to fasten the board inside and establish a secure connection.
 \todo[inline]{add more info on the connectors.}
@@ -237,6 +263,10 @@ After the \sensorboard\ is inserted or extracted the black tab is pushed closed 
 	\caption{Zero insertion force connector by Samtec used to connect the depicted \sensorboard\ to the \railboard .}
 	\label{fig:SensorBoard_connector}
 \end{figure}
+
+\textbf{III)} The connection to the FEE has not been decided on yet since the FEE itself is not final.
+The concept however is to use the connectors the PETsys boards use natively to attach them to the \railboard\ directly.
+In the mean time small \texttt{MMCX} connectors are being used to quickly attach an oscilloscope or other devices such as preamps to the transmission lines.
 
 
 
