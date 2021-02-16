@@ -1,5 +1,6 @@
 \documentclass[../BTOF_summary.tex]{subfiles}
- 
+\usepackage{graphicx}
+\graphicspath{Pictures}
 \begin{document}
 
 
@@ -16,6 +17,14 @@ It is foreseen to have four channels for all the LED's on one \railboard .
 This allows for every other LED on a single side along the board to be illuminated, leaving a dark scintillator between two illuminated scintillators.
 This ensures the signal is only produced by the internal light with no light bleed from a neighboring tile.
 By only illuminating one side \todo{what is the benefit of this?}
+
+This method needs to be improved as tests have shown that the signals measured from both sides of the scintillator tile vary in intensity, although it was assumed that these LEDs would be used for accurate measurements.
+Figure 1 shows a time delay measurement.
+\\
+\includegraphics[scale=0.2, angle =270]{Pictures/pic1.png}
+\\
+\textbf{Figure 1: Tests with two LEDs on the board 1: signals measured at odd connectors 1 and 19 on the left side.}
+\\
 
 \subsection{Position Calibration}
 
