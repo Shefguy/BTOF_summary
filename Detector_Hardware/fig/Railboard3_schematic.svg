@@ -14,7 +14,7 @@
    viewBox="0 0 448.61726 166.37655"
    id="svg139969"
    version="1.1"
-   inkscape:version="1.0.2 (1.0.2+r75+1)"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
    sodipodi:docname="Railboard3_schematic.svg">
   <defs
      id="defs139971">
@@ -1303,8 +1303,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.6276555"
-     inkscape:cx="230.54731"
-     inkscape:cy="94.264781"
+     inkscape:cx="183.61846"
+     inkscape:cy="84.7813"
      inkscape:document-units="px"
      inkscape:current-layer="g10467-0"
      showgrid="true"
@@ -1314,8 +1314,8 @@
      inkscape:object-nodes="true"
      showguides="true"
      inkscape:guide-bbox="true"
-     inkscape:window-width="1920"
-     inkscape:window-height="1016"
+     inkscape:window-width="1680"
+     inkscape:window-height="986"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
@@ -1349,7 +1349,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -3690,14 +3690,14 @@
           <text
              xml:space="preserve"
              style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-             x="8114.0781"
-             y="1995.2195"
+             x="8117.6567"
+             y="1993.6632"
              id="text5047-6-2-0"><tspan
                sodipodi:role="line"
                id="tspan5049-5-0-4"
-               x="8114.0781"
-               y="1995.2195"
-               style="font-size:11.25px;line-height:1.25">0,29 mm</tspan></text>
+               x="8117.6567"
+               y="1993.6632"
+               style="font-size:11.25px;line-height:1.25">0,3 mm</tspan></text>
           <text
              xml:space="preserve"
              style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -3746,14 +3746,14 @@
           <text
              xml:space="preserve"
              style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-             x="8181.356"
-             y="1938.3352"
+             x="8184.5371"
+             y="1938.7966"
              id="text5035-0-5-0-2"><tspan
                sodipodi:role="line"
                id="tspan5037-6-8-9-2"
-               x="8181.356"
-               y="1938.3352"
-               style="font-size:10px;line-height:1.25;stroke-width:1px">0,42 mm</tspan></text>
+               x="8184.5371"
+               y="1938.7966"
+               style="font-size:10px;line-height:1.25;stroke-width:1px">0,4 mm</tspan></text>
           <text
              xml:space="preserve"
              style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -3786,14 +3786,14 @@
           <text
              xml:space="preserve"
              style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-             x="7985.1143"
-             y="1995.2195"
+             x="7988.6924"
+             y="1993.6632"
              id="text5047-6-2-0-5"><tspan
                sodipodi:role="line"
-               id="tspan5049-5-0-4-6"
-               x="7985.1143"
-               y="1995.2195"
-               style="font-size:11.25px;line-height:1.25">0,29 mm</tspan></text>
+               x="7988.6924"
+               y="1993.6632"
+               style="font-size:11.25px;line-height:1.25"
+               id="tspan2213">0,3 mm</tspan></text>
           <path
              style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2, 1;stroke-dashoffset:0;stroke-opacity:1"
              d="m 7982.6426,1969.5046 v 20"
@@ -3860,14 +3860,14 @@
           <text
              xml:space="preserve"
              style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-             x="7923.4277"
-             y="1938.3351"
+             x="7926.6089"
+             y="1938.7966"
              id="text5035-0-5-0-2-1"><tspan
                sodipodi:role="line"
                id="tspan5037-6-8-9-2-8"
-               x="7923.4277"
-               y="1938.3351"
-               style="font-size:10px;line-height:1.25;stroke-width:1px">0,42 mm</tspan></text>
+               x="7926.6089"
+               y="1938.7966"
+               style="font-size:10px;line-height:1.25;stroke-width:1px">0,4 mm</tspan></text>
         </g>
       </g>
       <path

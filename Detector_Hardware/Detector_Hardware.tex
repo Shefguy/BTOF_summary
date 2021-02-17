@@ -4,7 +4,7 @@
 
 \section{The \btof\ Detector Hardware}
 
-The \btofD\ consists of 16 elements arranged symmetrically around the \panda\ interaction point. Each of these elements is called a \sm\ and comprises five main parts.
+The \btofD\ consists of 16 elements arranged symmetrically around the \panda\ interaction point. Each of these elements is called a \sm , shown in \fig ~\ref{fig:SuperModule} and comprises five main parts.
 
 \begin{itemize}
 	\item Active Medium (Scintillator Tiles)
@@ -14,9 +14,23 @@ The \btofD\ consists of 16 elements arranged symmetrically around the \panda\ in
 	\item Enclosure (Carbon Fiber)
 \end{itemize}
 
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=.8\textwidth]{fig/Supermodule_Design_full_open-min.jpg}
+	\caption{Full \sm\ without the FEE. It comprises a front \railboard\ (green), back \railboard\ (red), scintillators (white), \sensorboard s (yellow) and a carbon holding frame (gray).}
+	\label{fig:SuperModule}
+\end{figure}
+
 A single large PCB or a PCB split into a front and back part connect the Front End Electronics (FEE) to the detector elements. 
 Each \sm\ is equipped with 60 scintillator tiles in two rows, read out by four \sipms\ on each side of the scintillator. 
 This adds up to 3840 channels with a total amount of \num{15360} deployed \sipms .
+A cross section can bee seen in \fig ~
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=.8\textwidth]{fig/Railboard3_Schnitt.jpg}
+	\caption{Cross section of the \btof\ showing the carbon frame, the scintillators held in place by purple spacer with \sipms\ between the tiles and connected to the \railboard\ via flexible \sensorboard PCBs.}
+\end{figure}
 
 \subsection{Scintillator}
 Each scintillator of the \btofD\ is identical to the others and have the following dimensions; \SI{87 x 29.4 x 5}{mm}.
@@ -24,7 +38,7 @@ To fit inside the holding structure the corners of the scintillator tiles are tr
 Each chamfer is set at \SI{3}{mm}.
 This is a change from the design proposed in the Technical Design Report (TDR) which had rectangular scintillators.
 
-The performance impact of this change was studied using a strontium source on a mechanized arm, comparing time resolution measurements of cut and uncut scintillator tiles.\todo[inline]{The measurements of Svetlana need to be integrated here}
+The performance impact of this change was studied using a strontium source on a mechanized arm, comparing time resolution measurements of cut and uncut scintillator tiles.\todosvetlana[inline]{The measurements of the scintillator comparison need to be integrated here}
 As shown in \fig\ \todo{add figure} the bulk of the material shows little to no significant difference.
 The time resolution of events in the corners... \todo{finish this paragraph}
 
@@ -130,33 +144,37 @@ To establish a secure connection between the \sipms\ and the scintillator it is 
 	\label{fig:SensorBoradNew}
 \end{figure}
 
+Important findings during the testing of this new board is that the thin copper lines are very fragile.
+Multiple strong bends can sever the connection between the \sipms\ and the \railboard .
+For this reason it is important to handle these boards with care.
+To remedy this the transition of the \sipm\ solder pad to the transmission line was changed from a strict \ang{90} corner to a smoother teardrop shaped junction.\todosvetlana[]{add info on how this change affected the reliability of the boards}
+\todo[inline]{the first version of these boards whas not propperly impedance matched. The second version should be by increasing transmission line width and adding a copper back plane.}
+
+\subsubsection*{Calibration LED}
 The LED is supposed to function as a calibration and monitoring device during the operation of the detector.
-Calibrated signals are produced by flashing the LED and any change in amplitude or time resolution can be picked up and monitored for changes.
+Calibrated signals are produced by flashing the LED.
+Long term changes in amplitude or time resolution can be picked up and monitored, catching the eventual progression of the detector deterioration.
 The development of this procedure was subject of the work of a masters student who however never finished.
-Since then the first idea has not been developed.
+Since then the technique past the first idea has not been further developed.
 
 It would be necessary to determine the best way to drive the LEDs in order to produce a short and well defined signal. 
 This includes the optimal voltage and duration of the driving signal, as well as determining what LED specifically would be optimal.
 In general it is best to keep the emitted wavelengths as close to the scintillator light as possible to monitor the relevant performance.
-Ultimately this development would need to be made in combination with finalizing the electronics for whole system.
-
-Important findings during the testing of this new board is that the thin copper lines are very fragile.
-Multiple strong bends can sever the connection between the \sipms\ and the \railboard .
-For this reason it is important to handle these boards with care.
-To remedy this the transition of the \sipm\ solder pad to the transmission line was changed from a strict \ang{90} corner to a smoother teardrop shaped junction.\todo[]{add info on how this change affected the reliability of the boards}
-\todo[inline]{the first version of these boards what not propperly impedance matched. The second version should be by increasing transmission line width and adding a copper back plane.}
+Ultimately this development would need to be made in combination with finalizing the electronics of the whole system.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Temperature Sensor}
+\subsubsection*{Temperature Sensor}
 In order to monitor the climate the scintillator tiles and the \sipms\ are subject to, every sensor board is equipped with a temperature sensor. It was important that these devices can be read out using a minimal amount of channels or transmission lines to keep the material budget and \railboard\ occupancy at a minimum.
-An individual channel for all 240 \sensorboard s per \sm\ would also overload the readout system.
+Individual channels for all 240 \sensorboard s per \sm\ would also overload the readout system.
 
 A solution to this is a digital temperature sensor on a 1-Wire bus.
 This bus offers the capability to connect a large amount of sensors in parallel, only requiring a ground, signal and power supply line.
-Such a sensor which is used on the \sensorboard s is the \texttt{DS18B20} by \textit{Maxim Integrated}.
+Such a sensor is the \texttt{DS18B20} by \textit{Maxim Integrated}.
 These sensors can be controlled by a micro controller and utilize a hard coded 48-bit address for each sensor, which far exceeds the number of necessary sensors for one \railboard .
 To power them a bias voltage between \SIrange[]{3}{5.5}{V} is required.
 A schematic of the connection of such sensors can be seen in \fig ~\ref{fig:DS18B20_connection}.
+It is the sensor used in the prototype.
+It has been tested separately but not yet on the \railboard .
 
 \begin{figure}[htbp]
 	\centering
@@ -178,7 +196,7 @@ Due to stability issues and too small tolerances in the connectors the form of t
 The single \railboard\ is replaced by four large PCB's, one of which is shown in \fig ~\ref{fig:Railboard}.
 Two of these boards are attached by ribbon cables to connect one full row of 60 scintillators to the FEE and held in place by plastic screws to the carbon frame.
 
-\begin{figure}
+\begin{figure}[htbp]
 	\centering
 	\includegraphics*[width=.9\textwidth]{fig/Railboard3_imageCombined.png}
 	\caption{Combined depiction of the internal transmission line layout and a photograph of the front part of the \railboard .}
@@ -192,10 +210,10 @@ For the purposes of minimizing reflection losses, the characteristic impedance o
 For this the relation between the width of the transmission lines and the substrate thickness had be calculated.
 Since vertical space is limited a laminate thickness of \SI{0.406}{mm} was chosen which mandates a transmission line width of \SI{400}{\micro m}.
 
-\begin{figure}
+\begin{figure}[htbp]
 	\centering
 	\includegraphics[width=.9\textwidth]{fig/Railboard3_schematic.pdf}
-	\caption{Schematic of the internal layout of the \railboard\ conductors. The board substrate material is left blank.}
+	\caption{Schematic of the internal layout of the \railboard\ conductors. The board substrate material RO4003C is left blank.}
 	\label{fig:Railboard3_schematic}
 \end{figure}
 
@@ -211,7 +229,7 @@ Since the board is split already and requires external support it only makes sen
 This gives the detector a higher degree of modularity and makes installation and swapping of components easier.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Connectors}
+\subsection{Connectors and Connections}
 
 The board is equipped with three types of connectors, that 
 \begin{enumerate*}[I) ]
@@ -220,24 +238,40 @@ The board is equipped with three types of connectors, that
 	\item establishes a connection between the \railboard\ and the TOFPET ASIC.
 \end{enumerate*}\todo[]{maybe make this a bulleted list for better readibility.}
 
-\textbf{I)} The connectors for the ribbon cables between the boards as well as the connectors for the \sensorboard s are FFC/FPC\footnote{Flex Flat Cable / Flex Printed Circuit} connectors.
-To connect the two \railboard halves, as shown in \fig ~\ref{fig:Railboard_connection} two distinct FFC connectors are used.
+\textbf{I)} 
+The boards are connected by ribbon cables.
+The design of these cables has not been studied or optimized.
+They should optimally possess a characteristic impedance of \SI{50}{\ohm}.
+The cables used for the prototype do not quite fulfill that requirement.
+Each transmission line meant for \sipm\ signals is \SI{0.9999}{mm} wide with a separation of \SI{0.9999}{mm} between lines.\todo[]{add true dimensions}
+The lines on the cable alternate between transmission lines connected to \sipms\ and ground lines in order to reduce crosstalk between the channels.
+This however limits the width of each line in order to fit them all in the \SI{4}{cm} wide cable.\todo[]{add true width}
+To improve the transmission properties a copper back plane is added to the ribbon cable effectively making it a two layered board.
+One possible improvement would be to reduce the width or take out a number of the ground lanes to free up space.
+This is possible since the crosstalk was shown to be a nonissue.
+Additionally the prototype cables were both \SI{20}{cm}\todo[]{add true value} long.
+This gives the prototype some flexibility during the design phase.
+For the final design the cables should be shortened to the respective distance between the connectors.
+This makes one cable longer than the other.
+
+The connectors for the ribbon cables between the boards as well as the connectors for the \sensorboard s are FFC/FPC\footnote{Flex Flat Cable / Flex Printed Circuit} connectors.
+To connect the two \railboard\ halves, as shown in \fig ~\ref{fig:Railboard_connection} two distinct FFC connectors are used.
 Transmission lines which carry detector signals are connected via the \texttt{FH28-60S-0.5SH} connector by Hirose Electric Group, which is depicted in \fig~\ref{fig:Railboard_connector}.
-Connections for the power delivery and the temperature sensors are connected using the \texttt{ZF1-25} by Samtec, shown in \fig~\ref{fig:Railboard_power_connection}.
+Connections for the power delivery and the temperature sensors are connected using the \texttt{ZF1-25-01-T-WT-TR} by Samtec, shown in \fig~\ref{fig:Railboard_power_connection}.
 The main difference between the two connectors is the pitch size of connectors pins.
 Since there are many more signal lines on the \railboard\ than power lines, these have higher pitched connectors.
 If the number of power lines is to be increased this could be changed.
 It however is important to keep in mind that the higher the pitch of the connector, the closer each line is to one another physically limiting the voltage it can successfully sustain.
 \todo[inline]{add picture of cable and connectors.}
 
-\begin{figure}
+\begin{figure}[htbp]
 	\centering
 	\includegraphics[width=.7\textwidth]{fig/Railboard_Connection_filter.png}
 	\caption{Connection between the \railboard\ halves.}
 	\label{fig:Railboard_connection}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[htbp]
 	\centering
 	\includegraphics[height=5cm]{fig/LargeConnector_cable_crop.jpg}
 	\includegraphics[height=5cm]{fig/hirose_connector_drawing.png}
@@ -245,21 +279,24 @@ It however is important to keep in mind that the higher the pitch of the connect
 	\label{fig:Railboard_connector}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[htbp]
 	\centering
 	\includegraphics[height=5cm]{fig/Connector_ZF1-25-01.png}
-	\caption{Connector for power between \railboard s.}
+	\caption{Connector for power and LED signals between \railboard s.}
 	\label{fig:Railboard_power_connection}
 \end{figure}
 
-\textbf{II)} Similar connectors are used for the \sensorboard s. These are also connected via flat ribbon cable connectors. The model used is a zero insertion force connector by Samtec (\texttt{ZF1-10-01-T-WT-TR}) depicted in \fig~\ref{fig:SensorBoard_connector} with a naked \sensorboard .
+\textbf{II)} Similar connectors are used for the \sensorboard s, which are also connected via flat ribbon cable connectors.
+The model used is a zero insertion force connector by Samtec (\texttt{ZF1-10-01-T-WT-TR}) depicted in \fig~\ref{fig:SensorBoard_connector} with a naked \sensorboard .
+It is the same type of connector as above only with a reduced number of channels.
 To open the connector the black plastic tab is pulled out.
 After the \sensorboard\ is inserted or extracted the black tab is pushed closed to fasten the board inside and establish a secure connection.
 \todo[inline]{add more info on the connectors.}
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=.5\textwidth]{fig/SensorBoard_connector.png}
+	\includegraphics[height=4cm]{fig/SensorBoard_connector_drawing.png}
+	\includegraphics[height=4cm]{fig/SensorBoard_connector.png}
 	\caption{Zero insertion force connector by Samtec used to connect the depicted \sensorboard\ to the \railboard .}
 	\label{fig:SensorBoard_connector}
 \end{figure}
@@ -267,7 +304,117 @@ After the \sensorboard\ is inserted or extracted the black tab is pushed closed 
 \textbf{III)} The connection to the FEE has not been decided on yet since the FEE itself is not final.
 The concept however is to use the connectors the PETsys boards use natively to attach them to the \railboard\ directly.
 In the mean time small \texttt{MMCX} connectors are being used to quickly attach an oscilloscope or other devices such as preamps to the transmission lines.
+These fasten using a simple lock-snap mechanism allowing the connected cables to be rotated freely while providing a connector with a characteristic impedance of \SI{50}{\ohm} in a minimal package.
+An image showing most of these connectors soldered onto one board is shown in \fig ~\ref{fig:MMCX_connectors}.
 
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=.7\textwidth]{fig/MMCX_crop.jpg}
+	\caption{All \texttt{MMCX} connectors on one \railboard\ to connect to all 120 channels with two cables connected in the background.}
+	\label{fig:MMCX_connectors}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Material Budget}
+\label{sec:MaterialBudgetDesign}
+
+In order to affect the calorimeter performance as little as possible the of material in the \btof\ has to be minimized.
+The impact of the introduced material is measured in radiation lengths $X_0$.
+
+Although it is possible to calculate an estimation of the radiation length of a certain material, it is advised to use tables of measured radiation lengths.%~\cite{gupta2010calculation}.
+The data for the materials used here is provided by the Particle Data Group.%~\cite{PDG_materialData}.
+
+To obtain the radiation length of composite materials one must add the contributions of the individual components as in Equation~\eqref{eq:Material_Budget_Sum} weighted by the components thickness ($d_i$) or mass.%~\cite{patrignani2016review}.
+\begin{align}\label{eq:Material_Budget_Sum}
+	\frac{d_0}{X_0} = \sum_i \frac{d_i}{X_i}
+\end{align}
+Since the detector does not consist of homogeneous layers the individual components must be reduced to their effective thickness spread out over the surface of the detector.
+
+\subsubsection*{Radiation Length Estimation of Rogers Material}
+
+Since the Rogers Material is not such a widely used PCB substrate material no information on its radiation length is available.
+The only information supplied by the Rogers Corporation was that it is a hydro carbon based material filled with a ceramic (most likely Al$_2$O$_3$) and reinforced by glass fibers and provided the image shown in Figure with no further explanation. 
+From the image and density information of the relevant materials one can roughly estimate the composition and its radiation length. 
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=.6\textwidth]{fig/RogersCrossSection.pdf}
+	\caption[Image of the cross section of a sheet of Rogers Material RO4003C.]{Image of the cross section of a sheet of Rogers Material RO4003C, showing copper conductors surrounded by layers of a hydrocarbon substrate, filled with a ceramic (Al$_2$O$_3$) and reinforced with glass fibers.}
+	\label{fig:RogersCrossSection}
+\end{figure}
+
+To calculate the radiation length, information on the material composition is necessary as seen in Equation~\eqref{eq:Material_Budget_Sum}. The exact hydro carbon is unknown and with it its density and radiation length. By estimating these values as well as the fraction of fiber glass in the board the material composition can be calculated.
+
+Since the density ($\rho$) of the Rogers Material is known the other densities can be estimated. The density of an object is the sum of the density of its components weighted the fraction of the volume it occupies as described in Equation~\eqref{eq:RogersDensity}.
+\begin{align}
+	\rho_{RO} &= a \; \rho_\text{ceramic} + b \; \rho_\text{hc} + c \; \rho_\text{glass} \label{eq:RogersDensity} \\
+	1 &= a + b + c \nonumber
+\end{align}
+The list of relevant parameters is shown in Table~\ref{tab:RO_RadiationLength}, with estimated values highlighted in blue.
+Solid hydrocarbons tend to have a density of of around $\rho_\text{hc}=\SI{1.1\pm 0.15}{g/cm^3}$.
+The fibers visible in Figure~\ref{fig:RogersCrossSection} take up roughly \SI{20}{\percent} of the visible layer. Assuming a fiber packing density $2/3$ that of tightly packed spheres means a volume occupancy of around \SI{10}{\percent}. 
+The density dependent radiation length of hydrocarbons is rather stable no matter the exact composition with \SI{42 \pm 2}{g/cm^2}.
+With the additional condition that the volume fractions have to add up to 1, Equation~\eqref{eq:RogersDensity} can be solved for $b = \num{0.705(26)}$ and $c = \num{0.195(26)}$ giving us the material composition.
+Given the radiation length of Al$_2$O$_3$ and glass
+%Moving forward under this premise the board is made up of \SI{19.5 \pm 2.6}{\percent} Al$_2$O$_3$ and \SI{70.5 \pm 2.6}{\percent} hydro carbon resulting in 
+a radiation length of $X_0=\SI{180 \pm 15}{mm}$ can be calculated for the Rogers Material.
+
+\begin{table}[htbp]
+\centering
+\caption[Values for the calculation of the radiation length of the PCB substrate material.]{Values for the calculation of the radiation length of the PCB substrate material RO 4003C which is drawn in red. Values in blue are estimates and values in black are provided.}
+\label{tab:RO_RadiationLength}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+\textbf{Material} & \multicolumn{1}{r}{\textbf{Composition}} & \multicolumn{1}{r}{\textbf{$\rho$[g/cm$^3$]}}    & \multicolumn{1}{r}{\textbf{$X_0$ [g/cm$^2$]}} \\ \midrule
+RO4003c & \num{1.000}                                     & 1.79 & {\color[HTML]{C9211E} \textbf{\num{32.2(15)}}} \\
+AL2O3   & \num{0.195(26)}                                 & 3.97 & 27.94                                          \\
+Hydro Carbon      & \num{0.705(26)}                          & {\color[HTML]{2A6099} \textbf{\num{1.10(15)}}} & {\color[HTML]{2A6099} \textbf{\num{42.00(200)}}}      \\
+Glass   & {\color[HTML]{2A6099} \textbf{\num{0.100(50)}}} & 2.4  & 25.66                                          \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection*{\railboard\ Radiation Length Estimation}
+
+The \railboard s are comprised of two main materials: copper and the board substrate which is RO4003C.
+Since the amount of copper in the board compared to the board substrate itself is almost vanishingly small the entire volume of the board is presumed to be substrate with copper on top.
+With a substrate thickness of \SI{0.2}{mm} per layer and 15 layers of substrate this amounts to a thickness of $\SI{0.2}{mm} \times 15 = \SI{3}{mm}$ which is slightly below the measured thickness of \todo{remeasure and add thickness value}.
+
+The copper layers are split into ground plane ĺayers and such carrying transmission lines.
+Each \sm\ requires 240 lines for the \sipm\ channels alone.
+Other lines such as for the bias voltage, the LED's and the temperature sensor will not be considered.
+The 240 \SI{0.4}{mm} wide lines are distributed over 7 layers with 34.3 lines per layer.
+A guard line with the same dimensions is placed in between each transmission line.
+This brings the total up to 480 lines per \sm .
+With the copper of these \SI{0.017}{mm} thick lines distributed over the width of a \sm\ this results in an effective copper thickness of
+\[480 \cdot \SI{0.4}{mm} \cdot \SI{0.017}{mm} / \SI{185}{mm} = \]
+
+\subsubsection*{Composite Material Budget}
+For simplicity the detector is assumed to consists of an entire \SI{5}{mm} thick layer of scintillator material PVT.
+The carbon fiber (CFRP) housing with its three \SI{1}{mm} layers, one of which having around \SI{50}{\percent} cut out to save material, as well as the side elements are taken into account resulting in an effective thickness of \SI{2.72}{mm}.
+
+Since every module is equipped with 120 scintillators each read out by 8 \sipms\ the 960 \sipms\ need to be taken into account. As the basis for this estimation the \hamamatsu\ S13360-30XXPE was considered.%~\cite{MPPCdatasheet}.
+Assuming the \sipms\ are made out of pure silicon the \sipms\ of one module introduce \SI{23.3}{cm^3} of material on \SI{3330}{cm^2} of surface area. This produces an effective thickness of \SI{0.07}{mm}.
+
+The exact material budget for the \railboard\ and all its designs iterations is discussed later in Section.
+For this the latest iteration with the best performance will be included. All of these components are listed in Table~\ref{tab:MaterialBudget_total} resulting in a total material budget of $d_{\text{eff}} / X_0 = \SI{3.76}{\percent}$.
+\todo[inline]{change this paragraph and integrate the relevant information for Railboard v3.}
+
+\begin{table}[htbp]
+\centering
+\caption[Material budget estimation of the \btofLong .]{Material budget estimation of the \btofLong\ listed by component, giving their radiation length $X_0$, effective thickness ($d_{eff}$) and the resulting material budget contribution ($d_{\text{eff}} / X_0$).}
+\label{tab:MaterialBudget_total}
+\begin{tabular}{@{}llrrr@{}}
+\toprule
+\textbf{Component} & \textbf{Material} & $\mathbf{X_0}$ & $\mathbf{d_{eff}}$ & $\mathbf{d_{eff}/X_{0}}$ \\
+                   & \textbf{}         & \textbf{[mm]}  & \textbf{[mm]}      & \textbf{[\%]}            \\ \midrule
+\sipms             & Silicon           & 93.70          & 0.07               & 0.07                     \\
+Housing            & CFRP              & 260.00         & 2.72               & 1.04                     \\
+Scintillator       & PVT               & 417.50         & 5.00               & 1.20                     \\
+\railboard         &                   & -              & -                  & 1.45                     \\ \midrule
+\textbf{Sum}       &				      &                &                    & \textbf{3.76}            \\ \bottomrule
+\end{tabular}
+\end{table}
 
 
 \end{document}
