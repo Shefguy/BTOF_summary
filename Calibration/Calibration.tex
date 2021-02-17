@@ -36,7 +36,19 @@ The position of the individual scintillator tiles is mainly of interest in the c
 
 Since the time resolution is affected by signal noise and decreases of the slope of the rising flank it can be expected to receive a worse time resolution for scintillators farther down the \railboard\ with a longer distance between the detector element and the Front End Electronics.
 In order to create a baseline for the detector performance the time resolution needs to be measured along the length of the \railboard .
-Time resolution measurement gives excellent results of (50-100 ps) on the first part of the \railboard\ and unsatisfactory results of (300-400 ps) on the second part. In addition, distortions in the waveform during measurements were observed on the second part of the \railboard\ more often than on the first. 
+Measuring the time resolution at each slot along the entire \railboard\ gives fairly similar good results in the 90 to 160 ps range (see Fig. 2), but the time difference between the two signals increases on the second part (see Fig. 3, shown for the left part of the board) of the railboard due to waveform distortion (reflections, different signal attenuation on two sides of one slot).
+\\
+\includegraphics[scale=0.5]{Pictures/TimeDiff_toTrigger.pdf}
+\\
+\textbf{Figure 2: blabla.}
+\\
+
+\\
+\includegraphics[scale=0.5]{Pictures/TimeDiff_leftRight.pdf}
+\\
+\textbf{Figure 3: blabla.}
+\\
+
 
 \subsubsection{Signal Delay along the Board}
 
@@ -47,9 +59,12 @@ The speed a signal travels through a copper connection is significantly slower t
 Comparing the accumulated signal latency over the entire length of the board (between slots 1 and 60) with what we should expect from theory, that is, the signal velocity is usually about 16.3 cm per nanosecond \cite{bril,paul}, which shows a good match.
 
 \subsubsection{Amplitude Drop along the Board}
-Signal attenuation measurements have shown that a drop of up to 23\% is expected for an internal connection of 2m length, which means a fairly strong amplitude drop (see Fig. 2).
+Signal attenuation measurements have shown that a drop of up to 23\% is expected for an internal connection of 2m length, which means a fairly strong amplitude drop (see Fig. 4).
 \\
-\includegraphics[scale=0.3]{Pictures/pic2.png}
+\includegraphics[scale=0.5]{Pictures/SignalAmplitude.pdf}
+\\
+\textbf{Figure 4: blabla.}
+\\
 \\
 \\
 From the measurement results, the following conclusions were drawn from a technical point of view:
