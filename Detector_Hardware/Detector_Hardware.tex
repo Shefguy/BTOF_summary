@@ -385,12 +385,35 @@ Each \sm\ requires 240 lines for the \sipm\ channels alone.
 Other lines such as for the bias voltage, the LED's and the temperature sensor will not be considered.
 The 240 \SI{0.4}{mm} wide lines are distributed over 7 layers with 34.3 lines per layer.
 A guard line with the same dimensions is placed in between each transmission line.
-This brings the total up to 480 lines per \sm .
+This brings the total up to $n_\text{lines} = 480 + 28\footnote{1 guard line for each rail and layer}$ outer guard lines per \sm .
+The lines however do not run along the entire board hence a geometrical correction factor $c_\text{geo} = 0.5$ needs to be added.
 With the copper of these \SI{0.017}{mm} thick lines distributed over the width of a \sm\ this results in an effective copper thickness of
-\[480 \cdot \SI{0.4}{mm} \cdot \SI{0.017}{mm} / \SI{185}{mm} = \]
+\begin{align}
+	T_{\text{eff lines}} &= n_\text{lines} \cdot w_\text{line} \cdot T_\text{line} \cdot c_\text{geo} / w_\text{\sm} \\
+						 &= 508 \cdot \SI{0.4}{mm} \cdot \SI{0.017}{mm} \cdot 0.5 / \SI{185}{mm} \\
+						 &= \SI{9.3}{\micro m}
+\end{align}
+\todo[inline]{add description of symbols into text}
 
-In order to make the assumption that the boards are constructed homogeneously down its length we need to take the decreasing length of each channel transmission line into account.
-Since this is a continuous length increase we are able to divide the total area covered by copper by 2 to receive 
+The correction factor of 0.5 is added in order to make the assumption that the boards are constructed homogeneously down its length. For this we need to take the decreasing length of each channel transmission line into account.
+Since this is a continuous channel length increase with more copper closer to the FEE decreasing down the board, we are able to divide the total area covered by copper by 2 to receive mean effective copper thickness along the entire board.
+%This brings the effective copper thickness for the transmission and guard lines down to \SI{9.3}{\micro m}.
+
+In addition the the transmission lines the \railboard\ is equipped with ground planes.
+In the current prototype the ground plane covers the entire board.
+This however is not foreseen for the later detector.
+The ground plane only needs to span the width of the combined transmission line width including the guard lines.
+This width can be determined from the dimensions of the transmission lines as seen in \fig~\ref{fig:Railboard3_schematic}.
+One layer consists of 34.3 transmission lines and 39.3 guard lines each \SI{0.4}{mm} wide with a \SI{0.3}{mm} gap in between.
+This results in a line structure with the width of $W_\text{total}$.
+\begin{align}
+	W_\text{total} 	&= \left(34.3 + 39.3\right) \cdot \SI{0.4}{mm} + 2 \cdot 34.3 \cdot \SI{0.3}{mm} \\
+					&= \SI{50.02}{mm}
+\end{align}
+Applying the same correction for the mean along the board by dividing by 2 gives us the mean spread of the copper ground.
+Multiplying this by the number of layers and the copper thickness and dividing by the \sm\ width we receive the effective ground thickness.
+\[T_{\text{eff ground}} = \frac{1}{2} \cdot \SI{50.02}{mm} \cdot 7 \cdot \SI{17}{\micro m} \cdot \frac{1}{\SI{185}{mm}} = \SI{16}{\micro m}\]
+This gives us a total copper effective thickness of $\SI{9.3}{\micro m} + \SI{16}{\micro m} = \SI{25.3}{\micro m}$.
 
 \subsubsection*{Composite Material Budget}
 For simplicity the detector is assumed to consists of an entire \SI{5}{mm} thick layer of scintillator material PVT.
