@@ -1,6 +1,6 @@
 \documentclass[../BTOF_summary.tex]{subfiles}
-\usepackage{graphicx}
-\graphicspath{Pictures}
+%\usepackage{graphicx}
+%\graphicspath{Pictures}
 \begin{document}
 
 
@@ -40,23 +40,21 @@ The position of the individual scintillator tiles is mainly of interest in the c
 Since the time resolution is affected by signal noise and decreases of the slope of the rising flank it can be expected to receive a worse time resolution for scintillators farther down the \railboard\ with a longer distance between the detector element and the Front End Electronics.
 In order to create a baseline for the detector performance the time resolution needs to be measured along the length of the \railboard .
 Measuring the time of flight variation, which is expressed by the standard deviation, at each slot along the entire \railboard\ gives fairly similar good results in the 90 to 160 ps range (or double the time resolution of the scintillator) (see Fig. ~\ref{fig:TR}), but the time difference between the two signals increases on the second part (see Fig. ~\ref{fig:Diff}, shown for the left part of the board) of the railboard due to waveform distortion (reflections, different signal attenuation on two sides of one slot).
-\\
-\begin{figure}[h!]
-\includegraphics[scale=0.5]{Pictures/TimeRes.pdf}
-\\
-\textbf{Figure ~\ref{fig:TR}: blabla.}
-\label{fig:TR}
-\end{figure}
-\\
 
-\\
 \begin{figure}[h!]
-\includegraphics[scale=0.5]{Pictures/TimeDiff_leftRight.pdf}
-\\
-\textbf{Figure ~\ref{fig:Diff}: blabla.}
-\label{fig:Diff}
+    \centering
+    \includegraphics[scale=0.5]{Pictures/TimeRes.pdf}
+    \caption{A description of the image.}
+    \label{fig:TR}
 \end{figure}
-\\
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.5]{Pictures/TimeDiff_leftRight.pdf}
+    %\textbf{Figure ~\ref{fig:Diff}: blabla.}
+    \caption{A description of the image.}
+    \label{fig:Diff}
+\end{figure}
 
 \subsubsection{Signal Delay along the Board}
 
@@ -65,27 +63,28 @@ In order to provide an accurate time stamp for hits in the \btofD\ the time a si
 The speed a signal travels through a copper connection is significantly slower than the speed of light.
 
 Comparing the accumulated signal latency over the entire length of the board (between slots 1 and 60) with what we should expect from theory, that is, the signal velocity is usually about 16.3 cm per nanosecond \cite{bril,paul}, which shows a good match (see Fig. ~\ref{fig:DiffTr}).
-\\
-\includegraphics[scale=0.5]{Pictures/TimeDiff_toTrigger.pdf}
-\\
+
 \begin{figure}[h!]
-\textbf{Figure ~\ref{fig:DiffTr}: blabla.}
-\label{fig:DiffTr}
+    \centering
+    \includegraphics[scale=0.5]{Pictures/TimeDiff_toTrigger.pdf}
+    %\textbf{Figure ~\ref{fig:DiffTr}: blabla.}
+    \caption{A description of the image.}
+    \label{fig:DiffTr}
 \end{figure}
-\\
 
 \subsubsection{Amplitude Drop along the Board}
 Signal attenuation measurements have shown that a drop of up to 23\% is expected for an internal connection of 2m length, which means a fairly strong amplitude drop (see Fig. ~\ref{fig:SA}).
-\\
+
 \begin{figure}[h!]
-\includegraphics[scale=0.5]{Pictures/SignalAmplitude.pdf}
-\\
-\textbf{Figure ~\ref{fig:SA}: blabla.}
-\label{fig:SA}
+    \centering
+    \includegraphics[scale=0.5]{Pictures/SignalAmplitude.pdf}
+    %\textbf{Figure ~\ref{fig:SA}: blabla.}
+    \caption{A description of the image.}
+    \label{fig:SA}
 \end{figure}
-\\
-\\
-\\
+
+
+
 From the measurement results, the following conclusions were drawn from a technical point of view:
 
 1. Flexible PCBs, along with ease of use on the one hand, showed waveform distortion when bent, on the other hand.
@@ -99,7 +98,7 @@ From the measurement results, the following conclusions were drawn from a techni
 5. There was no apparent jump in amplitude when switching from one board to another, associated with electrical connections, although signal distortions due to mechanical deformations of the flat cable (to ensure the connection of two boards) and the PCB occurred frequently, which led to a noticeable drop in amplitude.
 
 6. Signal measurements on the second board showed an inconsistent signal amplitude change, likely related to the electrical wiring diagram.
-\\
+
 \begin{thebibliography}{9}
 \bibitem{bril} 
 Brillouin, Léon. 
