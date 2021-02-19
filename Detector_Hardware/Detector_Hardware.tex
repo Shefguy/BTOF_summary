@@ -423,11 +423,36 @@ This gives us a total effective copper thickness of
 \begin{align}
 	T_\text{eff} &= T_\text{eff lines} + T_\text{eff ground} \\
 	&= \SI{9.3}{\micro m} + \SI{18.2}{\micro m} \\
-	&= \SI{27.6}{\micro m}.\footnote{mismatch due to round-off error}
+	&= \SI{27.6}{\micro m}, \qquad \text{(corrected for round-off errors)}.
 \end{align}
 
+Ignoring the arms of the \railboard s the individual boards have a width of $w_\text{board} = \SI{64}{mm}$.
+With $N_\text{subs layers} = 15$ layers and a thickness of $T_\text{layer} = \SI{0.2}{mm}$ per layer we receive an effective substrate thickness of
+\begin{align}
+	T_\text{eff substrate} &= N_\text{subs layers} \cdot T_\text{layer} \cdot n_\text{boards} \cdot w_\text{board} / w_\text{\sm} \\
+	&= 15 \cdot \SI{0.2}{mm} \cdot 2 \cdot \SI{64}{mm} / \SI{185}{mm} \\
+	&= \SI{2.08}{mm} . 
+\end{align}
+Dividing this effective thickness by the radiation length (X\textsubscript{0}) gives us the \railboard s contribution to the material budget which can be seen in Table~\ref{tab:MaterialBudget_Railboard}.
+For the third generation \railboard\ the thickness is equivalent to 1.34 X\textsubscript{0}.
+
+\begin{table}[htbp]
+\centering
+\caption[Material budget estimation of the \railboard .]{Material budget estimation of the \railboard\ listed by component, giving their radiation length $X_0$, effective thickness ($d_\text{eff}$) and the resulting material budget contribution ($d_{\text{eff}} / X_0$).}
+\label{tab:MaterialBudget_Railboard}
+\begin{tabular}{@{}llrrr@{}}
+\toprule
+\textbf{Component} & \textbf{Material} & $\mathbf{X_0}$ & $\mathbf{d_{eff}}$ & $\mathbf{d_{eff}/X_{0}}$ \\
+                   & \textbf{}         & \textbf{[mm]}  & \textbf{[mm]}      & \textbf{[\%]}            \\ \midrule
+Transmission Lines & Cu      & 14.4   & 0.03  & 0.19      \\
+Substrate          & RO4003C & 180.1  & 2.08  & 1.15      \\ \midrule
+\textbf{Sum}       &				      &                &                    & \textbf{1.34}            \\ \bottomrule
+\end{tabular}
+\end{table}
+
+
 \subsubsection*{Composite Material Budget}
-For simplicity the detector is assumed to consists of an entire \SI{5}{mm} thick layer of scintillator material (PVT).\todosebastian{test}
+For simplicity the detector is assumed to consists of an entire \SI{5}{mm} thick layer of scintillator material (PVT).
 The carbon fiber (CFRP) housing with its three \SI{1}{mm} layers, one of which having around \SI{50}{\percent} cut out to save material, as well as the side elements are taken into account resulting in an effective thickness of \SI{2.72}{mm}.
 
 Since every module is equipped with 120 scintillators each read out by 8 \sipms\ the 960 \sipms\ need to be taken into account. As the basis for this estimation the \hamamatsu\ S13360-30XXPE was considered.%~\cite{MPPCdatasheet}.
