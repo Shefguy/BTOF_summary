@@ -144,6 +144,12 @@ To establish a secure connection between the \sipms\ and the scintillator it is 
 	\label{fig:SensorBoradNew}
 \end{figure}
 
+To ensure a matching characteristic impedance the line dimensions need to be controlled.
+A possible layout to achieve a characteristic impedance of \SI{50}{\ohm} would be a flex board from \texttt{beta-layout.com} who produce flexible embedded microstrip boards with a subtrate thickness of \SI{80}{\micro m} with \SI{50}{\micro m} of cover film, a copper strength of \SI{18}{\micro m} and a dielectric constant of 3.2 to 3.3.
+With a line width of \SI{257}{\micro m} this produces an impedance of \SI{49.94}{\ohm}.
+
+Our first version of these boards however were not properly impedance matched.\todo[]{what are the dimensions of the first boards?}
+
 Important findings during the testing of this new board is that the thin copper lines are very fragile.
 Multiple strong bends can sever the connection between the \sipms\ and the \railboard .
 For this reason it is important to handle these boards with care.
@@ -232,11 +238,11 @@ This gives the detector a higher degree of modularity and makes installation and
 \subsection{Connectors and Connections}
 
 The board is equipped with three types of connectors, that 
-\begin{enumerate*}[I) ]
+\begin{enumerate*}[label=\textbf{\Roman*})]
 	\item  connect the two halves of the \railboard\ to one another, 
 	\item the \sensorboard s to the \railboard\ and 
 	\item establishes a connection between the \railboard\ and the TOFPET ASIC.
-\end{enumerate*}\todo[]{maybe make this a bulleted list for better readibility.}
+\end{enumerate*}
 
 \textbf{I)} 
 The boards are connected by ribbon cables.
@@ -257,12 +263,15 @@ This makes one cable longer than the other.
 The connectors for the ribbon cables between the boards as well as the connectors for the \sensorboard s are FFC/FPC\footnote{Flex Flat Cable / Flex Printed Circuit} connectors.
 To connect the two \railboard\ halves, as shown in \fig ~\ref{fig:Railboard_connection} two distinct FFC connectors are used.
 Transmission lines which carry detector signals are connected via the \texttt{FH28-60S-0.5SH} connector by Hirose Electric Group, which is depicted in \fig~\ref{fig:Railboard_connector}.
+These connectors are only rated up to \SI{50}{\ohm} but since only event signal pulses travel down this line this is sufficient.
+
 Connections for the power delivery and the temperature sensors are connected using the \texttt{ZF1-25-01-T-WT-TR} by Samtec, shown in \fig~\ref{fig:Railboard_power_connection}.
+These connectors are rated up to \SI{215}{V} of working voltage and a break down voltage of \SI{875}{V}.
+
 The main difference between the two connectors is the pitch size of connectors pins.
 Since there are many more signal lines on the \railboard\ than power lines, these have higher pitched connectors.
 If the number of power lines is to be increased this could be changed.
 It however is important to keep in mind that the higher the pitch of the connector, the closer each line is to one another physically limiting the voltage it can successfully sustain.
-\todo[inline]{add picture of cable and connectors.}
 
 \begin{figure}[htbp]
 	\centering
@@ -392,7 +401,6 @@ With the copper of these $T_\text{line} = \SI{0.017}{mm}$ thick lines distribute
 						 &= 508 \cdot \SI{0.4}{mm} \cdot \SI{0.017}{mm} \cdot 0.5 / \SI{185}{mm} \\
 						 &= \SI{9.3}{\micro m} .
 \end{align}
-\todo[inline]{add description of symbols into text}
 
 The geometrical correction factor of 0.5 is added in order to make the assumption that the boards are constructed homogeneously down its length.
 For this we need to take the decreasing length of each channel transmission line into account.
@@ -423,7 +431,7 @@ This gives us a total effective copper thickness of
 \begin{align}
 	T_\text{eff} &= T_\text{eff lines} + T_\text{eff ground} \\
 	&= \SI{9.3}{\micro m} + \SI{18.2}{\micro m} \\
-	&= \SI{27.6}{\micro m}, \qquad \text{(corrected for round-off errors)}.
+	&= \SI{27.6}{\micro m} \qquad \text{(corrected for round-off errors)}.
 \end{align}
 
 Ignoring the arms of the \railboard s the individual boards have a width of $w_\text{board} = \SI{64}{mm}$.
@@ -455,27 +463,27 @@ Substrate          & RO4003C & 180.1  & 2.08  & 1.15      \\ \midrule
 For simplicity the detector is assumed to consists of an entire \SI{5}{mm} thick layer of scintillator material (PVT).
 The carbon fiber (CFRP) housing with its three \SI{1}{mm} layers, one of which having around \SI{50}{\percent} cut out to save material, as well as the side elements are taken into account resulting in an effective thickness of \SI{2.72}{mm}.
 
-Since every module is equipped with 120 scintillators each read out by 8 \sipms\ the 960 \sipms\ need to be taken into account. As the basis for this estimation the \hamamatsu\ S13360-30XXPE was considered.%~\cite{MPPCdatasheet}.
+Since every module is equipped with 120 scintillators each read out by 8 \sipms\ the 960 \sipms\ need to be taken into account. As the basis for this estimation the \hamamatsu\ S13360-30XXPE was considered. %~\cite{MPPCdatasheet}.
 Assuming the \sipms\ are made out of pure silicon the \sipms\ of one module introduce \SI{23.3}{cm^3} of material on \SI{3330}{cm^2} of surface area. This produces an effective thickness of \SI{0.07}{mm}.
 
-The exact material budget for the \railboard\ and all its designs iterations is discussed later in Section.
-For this the latest iteration with the best performance will be included. All of these components are listed in Table~\ref{tab:MaterialBudget_total} resulting in a total material budget of $d_{\text{eff}} / X_0 = \SI{3.76}{\percent}$.
-\todo[inline]{change this paragraph and integrate the relevant information for Railboard v3.}
+The material budget contribution of the \railboard\ was discussed in the previous section.
+
+All of these components are listed in Table~\ref{tab:MaterialBudget_total} resulting in a total material budget of $d_{\text{eff}} / X_0 = \SI{3.66}{\percent}$.
 
 \begin{table}[htbp]
-\centering
-\caption[Material budget estimation of the \btofLong .]{Material budget estimation of the \btofLong\ listed by component, giving their radiation length $X_0$, effective thickness ($d_{eff}$) and the resulting material budget contribution ($d_{\text{eff}} / X_0$).}
-\label{tab:MaterialBudget_total}
-\begin{tabular}{@{}llrrr@{}}
-\toprule
-\textbf{Component} & \textbf{Material} & $\mathbf{X_0}$ & $\mathbf{d_{eff}}$ & $\mathbf{d_{eff}/X_{0}}$ \\
-                   & \textbf{}         & \textbf{[mm]}  & \textbf{[mm]}      & \textbf{[\%]}            \\ \midrule
-\sipms             & Silicon           & 93.70          & 0.07               & 0.07                     \\
-Housing            & CFRP              & 260.00         & 2.72               & 1.04                     \\
-Scintillator       & PVT               & 417.50         & 5.00               & 1.20                     \\
-\railboard         &                   & -              & -                  & 1.45                     \\ \midrule
-\textbf{Sum}       &				      &                &                    & \textbf{3.76}            \\ \bottomrule
-\end{tabular}
+	\centering
+	\caption[Material budget estimation of the \btofLong .]{Material budget estimation of the \btofLong\ listed by component, giving their radiation length $X_0$, effective thickness ($d_{eff}$) and the resulting material budget contribution ($d_{\text{eff}} / X_0$).}
+	\label{tab:MaterialBudget_total}
+	\begin{tabular}{@{}llrrr@{}}
+		\toprule
+		\textbf{Component} & \textbf{Material} & $\mathbf{X_0}$ & $\mathbf{d_{eff}}$ & $\mathbf{d_{eff}/X_{0}}$ \\
+		&    & \textbf{[mm]}  & \textbf{[mm]} & \textbf{[\%]}  \\ \midrule
+		\sipms       & Silicon & 93.70  & 0.07 & 0.07  \\
+		Housing      & CFRP    & 260.00 & 2.72 & 1.04  \\
+		Scintillator & PVT     & 417.50 & 5.00 & 1.20  \\
+		\railboard   & mix     & -      & -    & 1.34  \\ \midrule
+		\textbf{Sum}       &				      &                &                    & \textbf{3.66}            \\ \bottomrule
+	\end{tabular}
 \end{table}
 
 

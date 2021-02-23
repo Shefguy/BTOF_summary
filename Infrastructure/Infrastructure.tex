@@ -21,7 +21,7 @@ These variations lead to differences in the applied overvoltage and would need t
 This however is not feasible for the 3840 channels of the detector.
 
 Alternatively multiple detector module can be connected to the same biasing line.
-Measurements done in Erlangen with \hamamatsu\ xxx\todo{add sipm model} \sipms\ to determine the optimal bias voltage for each side of the detector showed a slight performance dependance.
+Measurements done in Erlangen with \hamamatsu\ \texttt{S13360-3050PE} \sipms\ to determine the optimal bias voltage for each side of the detector showed a slight performance dependance.
 If the \sipms\ are pre-sorted and grouped by breakdown voltage the overvoltage mismatch can be minimized.
 
 \subsection{Light Tight Enclosure}
@@ -32,6 +32,11 @@ Similar to the \bdirc\ it is foreseen that the carbon holding frame will act as 
 \subsection{Water Cooling of FEE}
 
 The main active component of the \btofD\ is the FEE placed at the end of the detector in front of the interaction point. As the main heat source of the detector it is foreseen to be water cooled.
+
+Each channel of the TOFPET2 ASIC by PETsys dissipates \SI{8.2}{mW}\todo[]{this does not take the other boards FEB/S and FEB/I into account. I dont know if they are necessary.} of heat.
+For the 240 channels of the \sm\ this adds up to \SI{2}{W} of heat energy.
+In addition to that the TOFPET2 ASIC's need to be read out by FEB-D of the PETsys system, of which one is required per \sm .
+
 \todo[inline]{What power draw does the TOFPET ASIC FEB/D have? This needs to be included.}
 
 \subsection{Air Cooling}
