@@ -29,17 +29,31 @@ If the \sipms\ are pre-sorted and grouped by breakdown voltage the overvoltage m
 To ensure minimal noise from stray photons the detector super-modules need to be packed in a light tight enclosure.
 Similar to the \bdirc\ it is foreseen that the carbon holding frame will act as the photon barrier.
 
-\subsection{Water Cooling of FEE}
+\subsection{Cooling}
 
-The main active component of the \btofD\ is the FEE placed at the end of the detector in front of the interaction point. As the main heat source of the detector it is foreseen to be water cooled.
+The active electrical components of the detector can be separated into two main regions with different cooling requirements.
+The first region is behind the interaction point at the end of the \sm\ where the Front-End-Electronics are positioned.
+Most cooling is required here.
+The second region is the \SI{1.8}{m} long section with all the optical and temperature sensors, as well as the LED's.
 
-Each channel of the TOFPET2 ASIC by PETsys dissipates \SI{8.2}{mW}\todo[]{this does not take the other boards FEB/S and FEB/I into account. I dont know if they are necessary.} of heat.
-For the 240 channels of the \sm\ this adds up to \SI{2}{W} of heat energy.
-In addition to that the TOFPET2 ASIC's need to be read out by FEB-D of the PETsys system, of which one is required per \sm .
+\subsubsection*{Cooling of FEE}
 
-\todo[inline]{What power draw does the TOFPET ASIC FEB/D have? This needs to be included.}
+The main active component of the \btofD\ is the FEE placed at the end of the detector in front of the interaction point.
+%As the main heat source of the detector it is foreseen to be water cooled.
+%
+Considering the standard readout system produced by PETsys we can expect the following heat output.
+Each channel of the TOFPET2 ASIC by PETsys dissipates \SI{8.2}{mW} of heat plus \SI{6}{mW} per channel for the LVDS buffers and LDO voltage regulators, which might not be required in the final version when the power supply is separated from the FEE.
+This brings the total heat output to \SI{14.2}{mW} per channel.
+For the 240 channels of the \sm\ this adds up to \SI{3.4}{W} of heat energy.
+In addition to that the TOFPET2 ASIC's need to be read out by FEB/D of the PETsys system, of which one is required per \sm .
 
-\subsection{Air Cooling}
+Each \sm\ can be equipped with up to one FEB/D, which needs a power supply capable of providing \SI{12}{V} and \SI{4}{A}, which results in a maximum power output of \SI{48}{W}.
+In total this means up to \SI{51.4}{W} of power need to be cooled.
+
+Depending on the available space, which depends on the final design of the FEE and the availability of cooling solutions either water or air cooling can be considered.
+In general a \SI{50}{W} heat source can easily be cooled with a passive cooler.
+
+\subsubsection*{Cooling of Sensors}
 
 Although there is a minimal amount of electrical components placed along the \railboard\ some heat will still be generated; mainly by the \sipms .
 Since the \sipm\ performance also is very dependant on the temperature a slight draft of pressured air along the \railboard\ should keep everything dry and produce a constant temperature.

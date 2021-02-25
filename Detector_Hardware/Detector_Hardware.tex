@@ -198,7 +198,7 @@ The solution to connect the photo sensors to the FEE and provide mechanical supp
 It is a long PCB split into two parts due to availability issues of the base material.
 
 Previous designs relied solely on the mechanical support of a single \railboard\ spanning the entirety of a \sm\ to hold all components including the scintillators in place.
-Due to stability issues and too small tolerances in the connectors the form of the board has been redesigned and a carbon frame has been added.
+Due to stability issues and too small tolerances in the connectors the connection scheme and with it the form of the board has been redesigned and a carbon frame has been added.
 The single \railboard\ is replaced by four large PCB's, one of which is shown in \fig ~\ref{fig:Railboard}.
 Two of these boards are attached by ribbon cables to connect one full row of 60 scintillators to the FEE and held in place by plastic screws to the carbon frame.
 
@@ -225,12 +225,29 @@ Since vertical space is limited a laminate thickness of \SI{0.406}{mm} was chose
 
 % low loss material
 \sipm\ signals with a rise time of \SI{3}{ns} correspond to a frequency of \SI{167}{MHz}.
-At this frequency dielectric losses start to take on a larger portion of the electric losses experienced along a transmission line\footnote{more information in the dissertation "Development of the Fast Timing \panda\ Barrel Time-of-Flight Detector" by S. Zimmermann}.
+At this frequency dielectric losses start to take on a larger portion of the electric losses experienced along a transmission line as seen in \fig~\ref{fig:LowLossCurve} \footnote{more information in the dissertation "Development of the Fast Timing \panda\ Barrel Time-of-Flight Detector" by S. Zimmermann}.
 To reduce these losses special PCB substrate materials have been developed such as RO4003C by Rogers Corp.
 This is the material that is used for the \btof\ \railboard\ to ensure minimal losses for an optimal performance.
+
+\begin{figure}
+	\centering
+	\includegraphics*[width=.8\textwidth]{fig/Loss_Curve_Sebastian_v3.pdf}
+	\caption{Simulation of the resistive and dielectric losses expected for a \SI{400}{\micro m} wide \SI{50}{\ohm} impedance stripline in FR-4.}
+	\label{fig:LowLossCurve}
+\end{figure}
+
+\subsubsection{\railboard\ Split}
+
+The \railboard\ was split out of necessity to be able to use the chosen low loss material.
 Since RO4003C sheets are not available beyond 48 inches or \SI{1.224}{m} the boards need to be split into a front and back part each holding 30 scintillators.
 The mentioned size is the standard sheet size.
 We did not make inquiries to determine whether larger nonstandard sizes were available.
+Boards made out of FR-4 however are available in large sizes although few companies are able to handle such boards sizes.
+Companies such as Thales in the Netherlands or Micro-Pattern Technologies at CERN are equipped with the necessary technical facilities to be able to produce boards of sufficient size.
+
+The drawback of this however is that a connection between the boards neesd to be established which potentially introduces unwanted behavior by picking up noise or introducing losses when not perfectly impedance matched.
+It needs to evaluated if the gains from using Rogers Material outweigh the drawbacks of splitting the boards.
+
 Since the board is split already and requires external support it only makes sense to separate the scintillator rows along the long axis.
 This gives the detector a higher degree of modularity and makes installation and swapping of components easier.
 
