@@ -38,9 +38,19 @@ To fit inside the holding structure the corners of the scintillator tiles are tr
 Each chamfer is set at \SI{3}{mm}.
 This is a change from the design proposed in the Technical Design Report (TDR) which had rectangular scintillators.
 
-The performance impact of this change was studied using a strontium source on a mechanized arm, comparing time resolution measurements of cut and uncut scintillator tiles.\todosvetlana[inline]{The measurements of the scintillator comparison need to be integrated here}
-As shown in \fig\ \todo{add figure} the bulk of the material shows little to no significant difference.
-The time resolution of events in the corners... \todo{finish this paragraph}
+The performance impact of this change was studied using a pulsed laser on a mechanized arm, comparing time resolution measurements of cut and uncut scintillator tiles.
+As shown in \fig~\ref{fig:Surface_Scan_cutUncut} no time resolution worsening can be seen when removing scintillator material from the corners.
+In the contrary the measurements show a time resolution improvement for the scintillator with the cut corners.
+This however is most likely due to systematic errors of the measurements and not a general performance improvement due to the new geometry since the improvement is constant across the surface.
+\todo[inline]{Move the measurments to the performance validation section}
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=.49\textwidth]{fig/Time_Resolution_Surface_Scan_Uncut_Corners.pdf}
+	\includegraphics[width=.49\textwidth]{fig/Time_Resolution_Surface_Scan_Cut_Corners.pdf}
+	\caption{Comparison of the time resolution surface scan achieved with a scintillator tile of old dimensions (left) and new dimensions with a cut corner (right).}
+	\label{fig:Surface_Scan_cutUncut}
+\end{figure}
 
 \subsubsection*{Material}
 The scintillator of choice for the detector dimensions is the EJ-232 by Eljen Technology. It is an organic scintillator compound developed for high accuracy timing applications \footnote{\url{https://eljentechnology.com/products/plastic-scintillators/ej-232-ej-232q}}.
@@ -272,7 +282,7 @@ This however limits the width of each line in order to fit them all in the \SI{4
 To improve the transmission properties a copper back plane is added to the ribbon cable effectively making it a two layered board.
 One possible improvement would be to reduce the width or take out a number of the ground lanes to free up space.
 This is possible since the crosstalk was shown to be a nonissue.
-Additionally the prototype cables were both \SI{20}{cm}\todo[]{add true value} long.
+Additionally the prototype cables were both \SI{20}{cm} long.
 This gives the prototype some flexibility during the design phase.
 For the final design the cables should be shortened to the respective distance between the connectors.
 This makes one cable longer than the other.
