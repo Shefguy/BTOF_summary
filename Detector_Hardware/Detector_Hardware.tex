@@ -185,7 +185,11 @@ It has been tested separately but not yet on the \railboard .
 	\label{fig:DS18B20_connection}
 \end{figure}
 
-\todo[inline]{add more info from Bernds thesis concerning function of the sensor. How long does it take to read out, etc}
+The readout process consists of two parts, the initial command to measure the temperature and write the value into memory and secondly the process of retrieving this information.
+Together this can take up to \SI{1.5}{s} for 60 sensors.
+Every additional sensor would require an addition \SI{12}{ms}.
+This means that for all 240 sensors on one \sm\ the readout would take up to \SI{3.8}{s}.
+With signal amplitudes between \SIlist{3.3;5}{V} the resulting crosstalk prevents any meaningful data taking in this time.
 
 
 \subsection{\railboard}
