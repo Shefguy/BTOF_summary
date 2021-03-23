@@ -38,20 +38,6 @@ To fit inside the holding structure the corners of the scintillator tiles are tr
 Each chamfer is set at \SI{3}{mm}.
 This is a change from the design proposed in the Technical Design Report (TDR) which had rectangular scintillators.
 
-The performance impact of this change was studied using a pulsed laser on a mechanized arm, comparing time resolution measurements of cut and uncut scintillator tiles.
-As shown in \fig~\ref{fig:Surface_Scan_cutUncut} no time resolution worsening can be seen when removing scintillator material from the corners.
-In the contrary the measurements show a time resolution improvement for the scintillator with the cut corners.
-This however is most likely due to systematic errors of the measurements and not a general performance improvement due to the new geometry since the improvement is constant across the surface.
-\todo[inline]{Move the measurments to the performance validation section}
-
-\begin{figure}[htpb]
-	\centering
-	\includegraphics[width=.49\textwidth]{fig/Time_Resolution_Surface_Scan_Uncut_Corners.pdf}
-	\includegraphics[width=.49\textwidth]{fig/Time_Resolution_Surface_Scan_Cut_Corners.pdf}
-	\caption{Comparison of the time resolution surface scan achieved with a scintillator tile of old dimensions (left) and new dimensions with a cut corner (right).}
-	\label{fig:Surface_Scan_cutUncut}
-\end{figure}
-
 \subsubsection*{Material}
 The scintillator of choice for the detector dimensions is the EJ-232 by Eljen Technology. It is an organic scintillator compound developed for high accuracy timing applications \footnote{\url{https://eljentechnology.com/products/plastic-scintillators/ej-232-ej-232q}}.
 The equivalent Saint-Gobain/Bicron equivalent product would be the BC-422 scintillator.
@@ -76,7 +62,7 @@ Since the performance difference between \SIlist[]{5;6}{mm} is minimal and the m
 Since the time resolution of a scintillator detector is coupled to the number of detected photons, the scintillator tiles are wrapped in order to reflect photons that escape the scintillator back into it.
 The material choice was subject to tests performed on a scintillator tile using a \sr\ source in order to determine the best performing wrapping.
 Material candidates were aluminized mylar foil, Tyvek hardstructure 1057D, enhanced specular reflector (ESR), Teflon tape, aluminum foil and no wrapping.
-As can be seen in Table~\ref{tab:WrappingTest}, taken from the \btof\ TDR\todo[]{add Ref to TDR}, the performance difference was within \SI{6.7}{ps} from the best to the worst performing wrapping and a standard deviation of \SI{2.23}{ps}.
+As can be seen in Table~\ref{tab:WrappingTest}, taken from the \btof\ TDR\footnote{\url{https://panda.gsi.de/system/files/user_uploads/ken.suzuki/RE-TDR-2016-003_0.pdf}}, the performance difference was within \SI{6.7}{ps} from the best to the worst performing wrapping and a standard deviation of \SI{2.23}{ps}.
 
 \begin{table*}[htbp]
 	\caption[Time resolution for different wrapping materials]{Time resolution of EJ-232 (top) and EJ-228 (bottom) plastic scintillator tiles for various wrapping materials.
@@ -118,7 +104,7 @@ Best suited for the \btofD\ is an effective photosensitive area of \SI{3x3}{mm} 
 Multiple manufacturers offer sensors of such kind including \hamamatsu, \ketek and \advansid\ each with slightly different operational parameters.
 One main point to consider is the operational voltage which differs greatly between manufacturers.
 While \hamamatsu\ \sipms\ are operated at around \SI{60}{V}, \ketek\ \sipms\ only require a bias voltage of around \SI{30}{V}.
-Since the sensors will be connected in series as described in Section \todo{add section on SiPM serial connection}, the operational voltage is 4 times the single sensor voltage, which affects the requirements from necessary electronics to drive the sensors.
+Since the sensors will be connected in series as described in Section 4.2 of the \btof\ TDR, the operational voltage is 4 times the single sensor voltage, which affects the requirements from necessary electronics to drive the sensors.
 
 The final choice on which \sipm\ model to use has not been made since the development of \sipms\ moves relatively fast and new product generations were expected.
 Tested sensors include the \texttt{S13360-3050PE} by \hamamatsu, the \texttt{PM3350} by \ketek\ and the \texttt{ASD-NUV3S-P} by \advansid , which all perform adequately.
@@ -248,14 +234,19 @@ This is the material that is used for the \btof\ \railboard\ to ensure minimal l
 
 \subsubsection{\railboard\ Split}
 
-The \railboard\ was split out of necessity to be able to use the chosen low loss material.
+The \railboard\ was split out of necessity to be able to use the chosen low loss material, which was initially meant to decrease the signal attenuation along the board.
 Since RO4003C sheets are not available beyond 48 inches or \SI{1.224}{m} the boards need to be split into a front and back part each holding 30 scintillators.
 The mentioned size is the standard sheet size.
 We did not make inquiries to determine whether larger nonstandard sizes were available.
 Boards made out of FR-4 however are available in large sizes although few companies are able to handle such boards sizes.
 Companies such as Thales in the Netherlands or Micro-Pattern Technologies at CERN are equipped with the necessary technical facilities to be able to produce boards of sufficient size.
 
-The drawback of this however is that a connection between the boards neesd to be established which potentially introduces unwanted behavior by picking up noise or introducing losses when not perfectly impedance matched.
+After further investigation, the positive influence of the low loss material on the signal amplitude is most likely negligible at the expected signal frequencies of around \SI{350}{MHz}.
+The larger performance improvement from the second to the third \railboard\ generation is due to the increased width.
+The larger benefit of using Rogers Material is the material budget savings it provides.
+Due to its smaller dielectric constant the distance and the amount of material between layers in the \railboard\ is reduced compared to regular FR-4, in order to keep the characteristic impedance of \SI{50}{\ohm}.
+
+The drawback of the split however is that a connection between the boards needs to be established which potentially introduces unwanted behavior by picking up noise or introducing losses when not perfectly impedance matched.
 It needs to evaluated if the gains from using Rogers Material outweigh the drawbacks of splitting the boards.
 
 Since the board is split already and requires external support it only makes sense to separate the scintillator rows along the long axis.
@@ -406,7 +397,8 @@ a radiation length of $X_0=\SI{180 \pm 15}{mm}$ can be calculated for the Rogers
 RO4003c & \num{1.000}                                     & 1.79 & {\color[HTML]{C9211E} \textbf{\num{32.2(15)}}} \\
 AL2O3   & \num{0.195(26)}                                 & 3.97 & 27.94                                          \\
 Hydro Carbon      & \num{0.705(26)}                          & {\color[HTML]{2A6099} \textbf{\num{1.10(15)}}} & {\color[HTML]{2A6099} \textbf{\num{42.00(200)}}}      \\
-Glass   & {\color[HTML]{2A6099} \textbf{\num{0.100(50)}}} & 2.4  & 25.66                                          \\ \bottomrule
+Glass   & {\color[HTML]{2A6099} \textbf{\num{0.100(50)}}} & 2.4  & 25.66         \\
+\bottomrule
 \end{tabular}
 \end{table}
 
@@ -469,7 +461,8 @@ With $N_\text{subs layers} = 15$ layers and a thickness of $T_\text{layer} = \SI
 	&= \SI{2.08}{mm} . 
 \end{align}
 Dividing this effective thickness by the radiation length (X\textsubscript{0}) gives us the \railboard s contribution to the material budget which can be seen in Table~\ref{tab:MaterialBudget_Railboard}.
-For the third generation \railboard\ the thickness is equivalent to \SI{1.34}{\percent}X\textsubscript{0}.
+For the third generation \railboard\ using Rogers Material the thickness is equivalent to \SI{1.34}{\percent}X\textsubscript{0}.
+Table~\ref{tab:MaterialBudget_RailboardFR4} shows the equivalent table using FR-4 as the substrate material, which due to the larger dielectric constant requires more material to keep the characteristic impedance at \SI{50}{\ohm}.
 
 \begin{table}[htbp]
 \centering
@@ -485,6 +478,20 @@ Substrate          & RO4003C & 180.1  & 2.08  & 1.15      \\ \midrule
 \end{tabular}
 \end{table}
 
+\begin{table}[htbp]
+\centering
+\caption[Material budget estimation of the \railboard\ with FR-4 instead of Rogers Material.]{Material budget estimation of the \railboard , this time with FR-4 as the substrate material, listed by component, giving their radiation length $X_0$, effective thickness ($d_\text{eff}$) and the resulting material budget contribution ($d_{\text{eff}} / X_0$).}
+\label{tab:MaterialBudget_RailboardFR4}
+\begin{tabular}{@{}llrrr@{}}
+\toprule
+\textbf{Component} & \textbf{Material} & $\mathbf{X_0}$ & $\mathbf{d_{eff}}$ & $\mathbf{d_{eff}/X_{0}}$ \\
+                   & \textbf{}         & \textbf{[mm]}  & \textbf{[mm]}      & \textbf{[\%]}            \\ \midrule
+Transmission Lines & Cu       & 14.4  & 0.04 & 0.29          \\
+Substrate		   & FR-4     & 155.0 & 2.59 & 1.67          \\ 
+\midrule
+\textbf{Sum} &    &   &      & \textbf{1.97} \\ \bottomrule
+\end{tabular}
+\end{table}
 
 \subsubsection*{Composite Material Budget}
 For simplicity the detector is assumed to consists of an entire \SI{5}{mm} thick layer of scintillator material (PVT).
