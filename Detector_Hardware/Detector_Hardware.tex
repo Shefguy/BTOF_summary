@@ -215,6 +215,7 @@ In order to maximize the conductor surface while minimizing the material budget 
 For the purposes of minimizing reflection losses, the characteristic impedance of the whole board was kept around \SI{50}{\ohm}.
 For this the relation between the width of the transmission lines and the substrate thickness had be calculated.
 Since vertical space is limited a laminate thickness of \SI{0.406}{mm} was chosen which mandates a transmission line width of \SI{400}{\micro m}.
+This resultes in an actual board thickness of \SI{3.4}{mm}.
 
 \begin{figure}[htbp]
 	\centering
@@ -271,9 +272,9 @@ The boards are connected by ribbon cables.
 The design of these cables has not been studied or optimized.
 They should optimally possess a characteristic impedance of \SI{50}{\ohm}.
 The cables used for the prototype do not quite fulfill that requirement.
-Each transmission line meant for \sipm\ signals is \SI{0.9999}{mm} wide with a separation of \SI{0.9999}{mm} between lines.\todo[]{add true dimensions}
+Each transmission line meant for \sipm\ signals is \SI{0.3}{mm} wide with a separation of \SI{0.2}{mm} between lines.
 The lines on the cable alternate between transmission lines connected to \sipms\ and ground lines in order to reduce crosstalk between the channels.
-This however limits the width of each line in order to fit them all in the \SI{4}{cm} wide cable.\todo[]{add true width}
+This however limits the width of each line in order to fit them all in the \SI{32.5}{mm} wide cable.
 To improve the transmission properties a copper back plane is added to the ribbon cable effectively making it a two layered board.
 One possible improvement would be to reduce the width or take out a number of the ground lanes to free up space.
 This is possible since the crosstalk was shown to be a nonissue.
@@ -410,7 +411,7 @@ Glass   & {\color[HTML]{2A6099} \textbf{\num{0.100(50)}}} & 2.4  & 25.66        
 
 The \railboard s are comprised of two main materials: copper and the board substrate which is RO4003C.
 Since the amount of copper in the board compared to the board substrate itself is almost vanishingly small the entire volume of the board is presumed to be substrate with copper on top.
-With a substrate thickness of \SI{0.2}{mm} per layer and 15 layers of substrate this amounts to a thickness of $\SI{0.2}{mm} \times 15 = \SI{3}{mm}$ which is slightly below the measured thickness of \todo{remeasure and add thickness value}.
+With a substrate thickness of \SI{0.2}{mm} per layer and 15 layers of substrate this amounts to a thickness of $\SI{0.2}{mm} \times 15 = \SI{3}{mm}$ which is slightly below the measured thickness of \SI{3.4}{mm}.
 
 The copper layers are split into ground plane ĺayers and such carrying transmission lines.
 Each \sm\ requires 240 lines for the \sipm\ channels alone.
@@ -523,6 +524,15 @@ All of these components are listed in Table~\ref{tab:MaterialBudget_total} resul
 		\textbf{Sum}       &				      &                &                    & \textbf{3.66}            \\ \bottomrule
 	\end{tabular}
 \end{table}
+
+\subsection{Radiation Hardness}
+
+Studies on the radiation hardness were not extended beyond what is available in the TDR.
+It was planned and attempted to measure the expected damage to the \sipms\ ourselves by joining the regular irradiation tests performed by the EMC group in Gießen.
+Goal of this analysis was to compare the performance of \sipms\ before and after irradiation.
+In particular the leakage current and dark count rate which should increase due to damage to the silicon lattice.
+However repeated delays due to issues at the irradiation facility in Groningen lead to this analysis also being delayed.
+Due to personal and time limitations the analysis was also never completed.
 
 
 \end{document}
