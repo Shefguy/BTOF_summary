@@ -1,0 +1,59 @@
+
+\documentclass[../BTOF_summary.tex]{subfiles}
+ 
+\begin{document}
+
+
+\section{Open Challenges}
+
+Things that still need to be completed:
+
+\begin{enumerate}
+    \item Readout Electronics (TOFPET ASIC)
+    \item Temperature sensor control 
+    \item Calibration LED control
+    \item Decision making on split / complete \railboard
+\end{enumerate}
+
+\subsection{Calibration LED}
+
+In order to provide ongoing performance monitoring LED's on the sensor boards are meant to be flashed.
+The resulting signal can be used to determine the time resolution or potential \sipm\ gain changes.
+The optimal electric pulse to produce the ideal LED signal was subject to investigation as part of a masters thesis.
+This project however was never finished and the question of the ideal LED driver remains to be determined.
+
+\subsection{Front End Electronics}
+
+The Front End Electronics are still to a large part undefined.
+The base of it is forseen to be built around the TOFPET ASIC by PETsys.
+This however would not deliver a complete system on its own.
+Components of the FEE that would still need to be integrated are the 
+\begin{itemize}
+    \item Temperature sensor control,
+    \item Calibration LED control.
+\end{itemize}
+
+The temperature sensor can easily be controlled and communicated with by a micro controller or via an FPGA.
+The internal FPGA of the TOFPET FEB/D would be a suitable candidate to take over these duties if it can spare some computing capacity.
+The FEB/D already communicates with the temperature sensors in the FEB/A, so it should be possible to extend this functionality towards additional sensors along the \railboard .
+
+The LED control seems fairly simple but depends on the implementation of the calibration LED's.
+If they are simply installed as is, the electronics are only required to provide a sharp electric pulse to drive the LED's for a split second to produce a short burst of light.
+
+\subsection[]{\railboard\ Split}
+
+The question whether the split of the \railboard\ is necessary remains to be answered.
+It was considered an option in order to be able to use RO4003C a low loss PCB substrate material which does not come in sheets larger than about \SI{1}{m}.
+The reduced signal amplitude losses are negligible however since the dielectric constant is smaller than for FR-4 we are able to use less material reducing the material budget.
+It remains to be seen if the connectors between the front and back part of the \railboard\ has any adverse effects on the time resolution of the detector.
+If no such negative effects manifest the board with RO4003C is to be preferred.
+
+\subsection{\sensorboard Behavior}
+
+While performing measurements with the flexible \sensorboard s some unexpected behavior was observed.
+The signal pulse shapes can be distorted depending on how bent the flex board is, with reflections on the line, some of which are stronger than others.
+These measurements however were done with unoptimized board dimension.
+Another board with proper dimensions for a characteristic impedance of \SI{50}{\ohm} has been made. 
+Test on whether the behavior persists and how to mitigate the distortions are still pending and subject to further investigation.
+
+\end{document}
