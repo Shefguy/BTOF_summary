@@ -141,10 +141,12 @@ To establish a secure connection between the \sipms\ and the scintillator it is 
 \end{figure}
 
 To ensure a matching characteristic impedance the line dimensions need to be controlled.
-A possible layout to achieve a characteristic impedance of \SI{50}{\ohm} would be a flex board from \texttt{beta-layout.com} who produce flexible embedded microstrip boards with a subtrate thickness of \SI{80}{\micro m} with \SI{50}{\micro m} of cover film, a copper strength of \SI{18}{\micro m} and a dielectric constant of 3.2 to 3.3.
-With a line width of \SI{257}{\micro m} this produces an impedance of \SI{49.94}{\ohm}.
+A possible layout to achieve a characteristic impedance of \SI{50}{\ohm} would be a flex board from \texttt{beta-layout.com} who produce flexible embedded microstrip boards with a substrate thickness of \SI{80}{\micro m} with \SI{50}{\micro m} of cover film on top, a copper strength of \SI{18}{\micro m} and a dielectric constant of 3.2 to 3.3 for a transmission line width of \SI{257}{\micro m}.
+%With a line width of \SI{257}{\micro m} this produces an impedance of \SI{49.94}{\ohm}.
 
-Our first version of these boards however were not properly impedance matched.\todo[]{what are the dimensions of the first boards?}
+Due to an error while calculating the expected impedance the second board version has increased transmission line widths of \SI{0.4}{mm} resulting in an impedance of \SI{38.4}{\ohm}.
+
+%Our first version of these boards however were not properly impedance matched since they had.\todo[]{what are the dimensions of the first boards?}
 
 Important findings during the testing of this new board is that the thin copper lines are very fragile.
 Multiple strong bends can sever the connection between the \sipms\ and the \railboard .
@@ -270,7 +272,7 @@ The board is equipped with three types of connectors, that
 \textbf{I)} 
 The boards are connected by ribbon cables.
 The design of these cables has not been studied or optimized.
-They should optimally possess a characteristic impedance of \SI{50}{\ohm}.
+They should ideally possess a characteristic impedance of \SI{50}{\ohm}.
 The cables used for the prototype do not quite fulfill that requirement.
 Each transmission line meant for \sipm\ signals is \SI{0.3}{mm} wide with a separation of \SI{0.2}{mm} between lines.
 The lines on the cable alternate between transmission lines connected to \sipms\ and ground lines in order to reduce crosstalk between the channels.
