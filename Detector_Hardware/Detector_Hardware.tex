@@ -65,7 +65,7 @@ Material candidates were aluminized mylar foil, Tyvek hardstructure 1057D, enhan
 As can be seen in Table~\ref{tab:WrappingTest}, taken from the \btof\ TDR\footnote{\url{https://panda.gsi.de/system/files/user_uploads/ken.suzuki/RE-TDR-2016-003_0.pdf}}, the performance difference was within \SI{6.7}{ps} from the best to the worst performing wrapping and a standard deviation of \SI{2.23}{ps}.
 
 \begin{table*}[htbp]
-	\caption[Time resolution for different wrapping materials]{Time resolution of EJ-232 (top) and EJ-228 (bottom) plastic scintillator tiles for various wrapping materials.
+	\caption[Time resolution for different wrapping materials]{Time resolution of EJ-232 (top) plastic scintillator tiles for various wrapping materials.
 		\label{tab:WrappingTest}}
 	\centering
 	%\resizebox{0.8\textwidth}{!}
@@ -101,7 +101,7 @@ A sensor that fits these criteria is the Silicon Photomultiplier (\sipm ).
 These small devices are available in multiple sizes.
 Best suited for the \btofD\ is an effective photosensitive area of \SI{3x3}{mm} with a thickness in the order of \SI{1.5}{mm}.
 
-Multiple manufacturers offer sensors of such kind including \hamamatsu, \ketek and \advansid\ each with slightly different operational parameters.
+Multiple manufacturers offer sensors of such kind including \hamamatsu , \ketek\ and \advansid\ each with slightly different operational parameters.
 One main point to consider is the operational voltage which differs greatly between manufacturers.
 While \hamamatsu\ \sipms\ are operated at around \SI{60}{V}, \ketek\ \sipms\ only require a bias voltage of around \SI{30}{V}.
 Since the sensors will be connected in series as described in Section 4.2 of the \btof\ TDR, the operational voltage is 4 times the single sensor voltage, which affects the requirements from necessary electronics to drive the sensors.
@@ -113,7 +113,7 @@ Tested sensors include the \texttt{S13360-3050PE} by \hamamatsu, the \texttt{PM3
 
 In order to effectively readout the \SI{5x30}{mm} large surface area of the ends of the scintillator tile, the active surface needs to be extended beyond a single \sipm\ with an effective photosensitive are of \SI{3x3}{mm}.
 To do this four \sipms\ are connected in series.
-This offers a larger active area without increasing the detector complexity by adding unnecessary channels by reading out the \sipms\ individually.
+This offers a larger active area without increasing the detector complexity by adding unnecessary channels when reading out the \sipms\ individually.
 
 Additionally connecting the sensors in series in contrast to a parallel connection, offers an improvement of the signal timing properties.
 The slope of the rising signal flank, which determines the signals timing susceptibility to electrical noise, depends on the sensors internal capacitance.
@@ -133,7 +133,7 @@ To establish a secure connection between the \sipms\ and the scintillator it is 
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[height=5cm]{fig/SensorBoardNew2.png}
+	\includegraphics[height=5cm]{fig/SensorBoardNew3.png}
 	\includegraphics[height=5cm]{fig/Sensorboards2Scintillator.jpg}
 	\includegraphics[height=5cm]{fig/Sensorboards2Scintillator2.jpg}
 	\caption[The flexible \sensorboard .]{A flexible \sensorboard\ featuring four \sipms\ in series, a temperature sensor and an LED (left), attached to a scintillator (middle) and a full active module (right).}
@@ -148,11 +148,15 @@ Due to an error while calculating the expected impedance the second board versio
 
 %Our first version of these boards however were not properly impedance matched since they had.\todo[]{what are the dimensions of the first boards?}
 
-Important findings during the testing of this new board is that the thin copper lines are very fragile.
+One important finding during the testing of this new board is that the thin copper lines are very fragile.
 Multiple strong bends can sever the connection between the \sipms\ and the \railboard .
 For this reason it is important to handle these boards with care.
 To remedy this the transition of the \sipm\ solder pad to the transmission line was changed from a strict \ang{90} corner to a smoother teardrop shaped junction.\todosvetlana[]{add info on how this change affected the reliability of the boards}
 \todo[inline]{the first version of these boards whas not propperly impedance matched. The second version should be by increasing transmission line width and adding a copper back plane.}
+
+Another issue with these \sensorboard s is that when bent in certain ways the boards produce distortions, including reflections, in the signal.
+One possible explanation is the fact that by changing the geometry of the board out of a two dimensional plane by bending it, the expected characteristic impedance changes and no longer is close to \SI{50}{\ohm}.
+Since this effect was observed in varying strength depending on the probed channel the layout of the specific \railboard\ channel might contribute in unknown ways.
 
 \subsubsection*{Calibration LED}
 The LED is supposed to function as a calibration and monitoring device during the operation of the detector.
@@ -164,7 +168,8 @@ Since then the technique past the first idea has not been further developed.
 It would be necessary to determine the best way to drive the LEDs in order to produce a short and well defined signal. 
 This includes the optimal voltage and duration of the driving signal, as well as determining what LED specifically would be optimal.
 In general it is best to keep the emitted wavelengths as close to the scintillator light as possible to monitor the relevant performance.
-Ultimately this development would need to be made in combination with finalizing the electronics of the whole system.
+Ultimately this development would need to be made in combination with finalizing the electronics of the whole system and still requires some effort to get right.
+The key is to produce a strong pulse ideally without interfering with the \sipm\ readout.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection*{Temperature Sensor}
@@ -211,7 +216,7 @@ Two of these boards are attached by ribbon cables to connect one full row of 60 
 	\label{fig:Railboard}
 \end{figure}
 
-Each board consists of 16 conductor layers alternating between shielding ground layers, which span the almost the entire layer and signal transmission lines, which can be seen in \fig ~\ref{fig:Railboard3_schematic}.
+Each board consists of 16 conductor layers alternating between shielding ground layers, which span almost the entire layer and signal transmission lines, which can be seen in \fig ~\ref{fig:Railboard3_schematic}.
 Since resistive losses at the relevant frequencies are dominated by the skin effect it is necessary to keep the conductor surface as large as possible.
 In order to maximize the conductor surface while minimizing the material budget all conductor layers are kept as thin as possible with a thickness of \SI{17}{\micro \meter}.
 For the purposes of minimizing reflection losses, the characteristic impedance of the whole board was kept around \SI{50}{\ohm}.
@@ -254,7 +259,7 @@ The larger benefit of using Rogers Material is the material budget savings it pr
 Due to its smaller dielectric constant the distance and the amount of material between layers in the \railboard\ is reduced compared to regular FR-4, in order to keep the characteristic impedance of \SI{50}{\ohm}.
 
 The drawback of the split however is that a connection between the boards needs to be established which potentially introduces unwanted behavior by picking up noise or introducing losses when not perfectly impedance matched.
-It needs to evaluated if the gains from using Rogers Material outweigh the drawbacks of splitting the boards.
+It needs to be evaluated if the gains from using Rogers Material outweigh the drawbacks of splitting the boards.
 
 Since the board is split already and requires external support it only makes sense to separate the scintillator rows along the long axis.
 This gives the detector a higher degree of modularity and makes installation and swapping of components easier.
@@ -263,7 +268,10 @@ This gives the detector a higher degree of modularity and makes installation and
 In order to provide a structural skeleton for the detector and shield the photo sensitive sensors from external light sources the \sm s are all positioned inside a carbon fiber box.
 This box also provides simple accessibility to the detector components since they can be slid in and out of the slot dedicated to the detector module.
 
-To achieve this the 
+To achieve this the frame should wrap around the entire detector while using minimal material.
+A primitive layout is available which uses three \SI{1}{mm} thick carbon layers for the main sides.
+The lid consist of a single \SI{1}{mm} thick piece, while an additional slotted sheet is added to the bottom.
+The sides of this layout consist of long L-pieces.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Connectors and Connections}
@@ -277,6 +285,7 @@ The board is equipped with three types of connectors, that
 
 \textbf{I)} 
 The boards are connected by ribbon cables.
+Since 60 channels need to be connected and each channel needs a guard trace to minimize crosstalk two cables are necessary, otherwise the pitch of the connectors would get too small.
 The design of these cables has not been studied or optimized.
 They should ideally possess a characteristic impedance of \SI{50}{\ohm}.
 The cables used for the prototype do not quite fulfill that requirement.
@@ -322,7 +331,7 @@ It however is important to keep in mind that the higher the pitch of the connect
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[height=5cm]{fig/Connector_ZF1-25-01.png}
-	\caption{Connector for power and LED signals between \railboard s.}
+	\caption{Connector for power and LED signals between \railboard s, which sit behind the signal connectors, just ouside of the scope of \fig~\ref{fig:Railboard_connection}.}
 	\label{fig:Railboard_power_connection}
 \end{figure}
 
@@ -359,7 +368,7 @@ An image showing most of these connectors soldered onto one board is shown in \f
 \subsection{Material Budget}
 \label{sec:MaterialBudgetDesign}
 
-In order to affect the calorimeter performance as little as possible the of material in the \btof\ has to be minimized.
+In order to affect the calorimeter performance as little as possible the mass of the \btof\ has to be minimized.
 The impact of the introduced material is measured in radiation lengths $X_0$.
 
 Although it is possible to calculate an estimation of the radiation length of a certain material, it is advised to use tables of measured radiation lengths.%~\cite{gupta2010calculation}.
@@ -386,7 +395,7 @@ From the image and density information of the relevant materials one can roughly
 
 To calculate the radiation length, information on the material composition is necessary as seen in Equation~\eqref{eq:Material_Budget_Sum}. The exact hydro carbon is unknown and with it its density and radiation length. By estimating these values as well as the fraction of fiber glass in the board the material composition can be calculated.
 
-Since the density ($\rho$) of the Rogers Material is known the other densities can be estimated. The density of an object is the sum of the density of its components weighted the fraction of the volume it occupies as described in Equation~\eqref{eq:RogersDensity}.
+Since the density ($\rho$) of the Rogers Material is known the other densities can be estimated. The density of an object is the sum of the density of its components weighted by the fraction of the volume it occupies as described in Equation~\eqref{eq:RogersDensity}.
 \begin{align}
 	\rho_{RO} &= a \; \rho_\text{ceramic} + b \; \rho_\text{hc} + c \; \rho_\text{glass} \label{eq:RogersDensity} \\
 	1 &= a + b + c \nonumber
@@ -541,6 +550,17 @@ Goal of this analysis was to compare the performance of \sipms\ before and after
 In particular the leakage current and dark count rate which should increase due to damage to the silicon lattice.
 However repeated delays due to issues at the irradiation facility in Groningen lead to this analysis also being delayed.
 Due to personal and time limitations the analysis was also never completed.
+
+The scintillators however were studied and show little damage.
+A plot of the spectral transmittance is shown in \fig~\ref{fig:scintillator_radiation_losses} plotting the transmittance spectra for wavelengths from \SIrange{200}{900}{nm}.
+Slight losses especially at lower wavelengths are visible, but nothing which would diminish the detectors performance or be a cause of concern for the detector.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=.8\textwidth]{fig/Scintillator_radiation_losses.png}
+	\caption{Transmittance of EJ-232 scintillator tiles at various stages of irradiation.}
+	\label{fig:scintillator_radiation_losses}
+\end{figure}
 
 
 \end{document}

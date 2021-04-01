@@ -106,7 +106,7 @@ Taking the signal timing information of the time resolution scan and simply crea
 The time difference along the short axis, in parallel to the \sipm\ arrays, is almost constant.
 Here no information can be extracted.
 Taking the time difference along the long axis however reveals an almost linear relation between the signal time difference and the position.
-\fig shows a projection of the time difference along the short axis to receive the mean time difference for every position along the long axis.
+\fig~\ref{fig:positionRes} shows a projection of the time difference along the short axis to receive the mean time difference for every position along the long axis.
 A linear fit of this distribution reveals a signal speed of \SI{0.12}{mm/ps}.
 Combined with the time resolution this produces a position resolution of \SI{12.8}{mm}.
 
@@ -119,6 +119,8 @@ Combined with the time resolution this produces a position resolution of \SI{12.
 
 \subsection{CERN Beam tests}
 \label{sec:CernBeamTest}
+
+As with the previous section, a more detailed discussion of these measurements can be found in the dissertation of Sebastian Zimmermann\footnote{\url{https://panda.gsi.de/publication/th-phd-2021-001}}.
 
 At beam tests in CERN's T9 hall the performance of the \btof\ modules was tested along side the DIRC systems.
 Main goal was to establish the detector performance under circumstances closer to the conditions found in \panda\ as well as  studying the influence of adding two additional \sipms\ to the readout array.
@@ -209,6 +211,7 @@ These pillars serve as mounting points for the split \railboard\ and offer guida
 
 The performance impact of this change was studied using a pulsed laser on a mechanized arm, comparing time resolution measurements of cut and uncut scintillator tiles.
 For this a partial scan of two scintillator tiles was performed measuring the time resolution of one half on the scintillator.
+The absolute values of each axis should not be taken too precisely since the position of the scintillator tiles was not exactly reproduced in the second measurement.
 As shown in \fig~\ref{fig:Surface_Scan_cutUncut} no time resolution worsening can be seen when removing scintillator material from the corners.
 In the contrary the measurements show a time resolution improvement for the scintillator with the cut corners.
 This however is most likely due to systematic errors of the measurements and not a general performance improvement due to the new geometry since the improvement is constant across the surface.
